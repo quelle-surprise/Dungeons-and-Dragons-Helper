@@ -9,7 +9,7 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import TestScreen from "../screens/TestScreen";
 
 const AppSwitchNavigator = createSwitchNavigator({
-    LoginScreen: {screen: LoginScreen},
+    Login: {screen: LoginScreen},
     Register: {screen: RegisterScreen},
     ForgotPassword: {screen: ForgotPasswordScreen},
     Test: { screen: TestScreen}

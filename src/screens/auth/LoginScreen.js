@@ -5,6 +5,7 @@ import { createAppContainer, createSwitchNavigator, NavigationActions } from "re
 import RegisterScreen from "./RegisterScreen";
 import Hyperlink from 'react-native-hyperlink'
 import * as firebase from 'firebase';
+import {SocialIcon} from "react-native-elements";
 
 export default class LoginScreen extends React.Component {
 
@@ -15,6 +16,7 @@ export default class LoginScreen extends React.Component {
             password: "",
         };
     }
+
     onLoginPress = (title, message) => {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => { }, (error) => { Alert.alert(error.message, message); });
@@ -44,7 +46,7 @@ export default class LoginScreen extends React.Component {
                            autoCorrect={false}
                 />
                 <View style={{paddingTop:10}} />
-                <Button title="Zaloguj się" onPress ={this.onLoginPress()}/>
+                <Button title="Zaloguj się" onPress ={this.onLoginPress}/>
                 <View style={{paddingTop:10}} />
                 <Hyperlink onPress ={() => this.props.navigation.navigate('ForgotPassword')}>
                     <Text style={ { fontSize: 15, color: 'blue'} }>
@@ -53,8 +55,35 @@ export default class LoginScreen extends React.Component {
                 </Hyperlink>
                 <View style={{paddingTop:50}} />
                 <Text> Nie masz konta?</Text>
-                <Button title="Zarejestruj się" onPress ={() => this.props.navigation.navigate('Register')} />
+                <Button style ={styles.button} title="Zarejestruj się" onPress ={() => this.props.navigation.navigate('Register')} />
+                <View style={{paddingTop:10}}/>
+                <View style = {styles.container}>
+                    <SocialIcon
+                        title = 'Kontynuuj z Facebook'
+                        button
+                        type = 'facebook'
+                        style = {styles.button}
+                    />
+                    <SocialIcon
+                        title = 'Kontynuuj z Twitter'
+                        button
+                        type = 'twitter'
+                        style = {styles.button}
+                    />
+                </View>
             </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    button: {
+        flex: 1,
+        width: '50%',
+        height: 50
+    }
+});

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import ApiKeys from './src/constants/ApiKeys';
 import * as firebase from 'firebase';
 import AuthenticationNavigation from "./src/navigation/AuthenticationNavigation";
+import TestScreen from "./src/screens/TestScreen";
 
 export default class App extends React.Component {
 
@@ -25,9 +26,13 @@ export default class App extends React.Component {
   };
 
   render() {
-    return (
-      <AuthenticationNavigation/>
-    );
+    if(this.state.isAuthenticated) {
+      return(<TestScreen/>)
+    } else {
+      return (
+          <AuthenticationNavigation/>
+      );
+    }
   }
 }
 

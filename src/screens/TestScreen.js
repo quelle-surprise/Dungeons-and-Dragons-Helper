@@ -20,6 +20,10 @@ export default class TestScreen extends React.Component {
         };
     }
 
+    onSignoutPress = () => {
+        firebase.auth().signOut();
+    };
+
     // Reauthenticates the current user and returns a promise...
     reauthenticate = (currentPassword) => {
         var user = firebase.auth().currentUser;

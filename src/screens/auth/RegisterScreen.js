@@ -1,6 +1,7 @@
-
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native';
+import {StyleSheet, View, TextInput, Button, Alert} from 'react-native';
+import {CheckBox} from 'react-native-elements'
+
 import * as firebase from 'firebase';
 
 export default class RegisterScreen extends React.Component {
@@ -21,54 +22,66 @@ export default class RegisterScreen extends React.Component {
         }
 
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => { }, (error) => { Alert.alert("", error.message); });
+            .then(() => {
+            }, (error) => {
+                Alert.alert("", error.message);
+            });
     };
 
-    onBackToLoginPress = () => { this.props.navigation.navigate('Login') };
+    onBackToLoginPress = () => {
+        this.props.navigation.navigate('Login')
+    };
 
     render() {
         return (
-            <View style={{paddingTop:150, alignItems:"center"}}>
+            <View style={{paddingTop: 150, alignItems: "center"}}>
 
-                <TextInput style={{width: 200, height: 40, borderBottomWidth: 0.5, borderBottomColor: 'black'}}
+                <TextInput style={{width: 200, height: 40, borderBottomWidth: 1, borderBottomColor: 'black'}}
                            value={this.state.email}
-                           onChangeText={(text) => { this.setState({email: text}) }}
+                           onChangeText={(text) => {
+                               this.setState({email: text})
+                           }}
                            placeholder="Wprowadź swój email"
                            keyboardType="email-address"
                            autoCapitalize="none"
                            autoCorrect={false}
                 />
 
-                <View style={{paddingTop:10}} />
+                <View style={{paddingTop: 10}}/>
 
-                <TextInput style={{width: 200, height: 40, borderBottomWidth: 0.5, borderBottomColor: 'black'}}
+                <TextInput style={{width: 200, height: 40, borderBottomWidth: 1, borderBottomColor: 'black'}}
                            value={this.state.password}
-                           onChangeText={(text) => { this.setState({password: text}) }}
+                           onChangeText={(text) => {
+                               this.setState({password: text})
+                           }}
                            placeholder="Hasło"
                            secureTextEntry={true}
                            autoCapitalize="none"
                            autoCorrect={false}
                 />
 
-                <View style={{paddingTop:10}} />
+                <View style={{paddingTop: 10}}/>
 
-                <TextInput style={{width: 200, height: 40, borderBottomWidth: 0.5, borderBottomColor: 'black'}}
+                <TextInput style={{width: 200, height: 40, borderBottomWidth: 1, borderBottomColor: 'black'}}
                            value={this.state.passwordConfirm}
-                           onChangeText={(text) => { this.setState({passwordConfirm: text}) }}
-                           placeholder="powtórz hasło"
+                           onChangeText={(text) => {
+                               this.setState({passwordConfirm: text})
+                           }}
+                           placeholder="Powtórz hasło"
                            secureTextEntry={true}
                            autoCapitalize="none"
                            autoCorrect={false}
                 />
-                <View style={{paddingTop:20}} />
-                <Button title="UTWÓRZ KONTO" onPress={this.onRegisterPress} />
-                <View style={{paddingTop:20}} />
-                <Button title="Wróć do ekranu logowanias" onPress ={this.onBackToLoginPress} />
+                <View style={{paddingTop: 20}}/>
+                <CheckBox
+                    title='Akceptuję regulamin aplikacji'
+                />
+                <Button title="UTWÓRZ KONTO" onPress={this.onRegisterPress} type="outline"/>
+                <View style={{paddingTop: 20}}/>
+                <Button title="Wróć do ekranu logowania" onPress={this.onBackToLoginPress}/>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
