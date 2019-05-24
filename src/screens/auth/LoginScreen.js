@@ -1,8 +1,6 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native';
-import { createAppContainer, createSwitchNavigator, NavigationActions } from "react-navigation";
-import RegisterScreen from "./RegisterScreen";
 import Hyperlink from 'react-native-hyperlink'
 import * as firebase from 'firebase';
 import {SocialIcon} from "react-native-elements";
@@ -75,6 +73,7 @@ export default class LoginScreen extends React.Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

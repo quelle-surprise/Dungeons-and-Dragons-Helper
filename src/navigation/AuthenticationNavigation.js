@@ -1,7 +1,5 @@
-import { Notifications } from 'expo';
 import React from 'react';
-import {createStackNavigator, createAppContainer, createSwitchNavigator} from 'react-navigation';
-import MainTabNavigator from './MainTabNavigator';
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import LoginScreen from './../screens/auth/LoginScreen';
 import ForgotPasswordScreen from './../screens/auth/ForgotPasswordScreen';
