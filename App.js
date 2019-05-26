@@ -4,6 +4,9 @@ import ApiKeys from './src/constants/ApiKeys';
 import * as firebase from 'firebase';
 import AuthenticationNavigation from "./src/navigation/AuthenticationNavigation";
 import TestScreen from "./src/screens/TestScreen";
+import SkillsScreen from "./src/screens/skills/SkillsScreen";
+import SpellsScreen from "./src/screens/spells/SpellsScreen";
+import MonstersScreen from "./src/screens/monsters/MonstersScreen";
 
 export default class App extends React.Component {
 
@@ -27,7 +30,7 @@ export default class App extends React.Component {
 
   render() {
     if(this.state.isAuthenticated) {
-      return(<TestScreen/>)
+      return(<MonstersScreen/>)
     } else {
       return (
           <AuthenticationNavigation/>
