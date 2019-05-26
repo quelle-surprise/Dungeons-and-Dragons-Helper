@@ -1,15 +1,13 @@
-
 import React from 'react';
-import { ScrollView, StyleSheet, TextInput, Button, Alert, } from 'react-native';
+import {ScrollView, StyleSheet, TextInput, Button, Alert, Text} from 'react-native';
 import * as firebase from 'firebase';
 
 /***
- Test screen to test authentication functionality, it needs to be deleted after creation of home screen.
+ Test screen to test authentication functionality, it needs to be moved to profile component after creation.
  */
-//TODO Delete after creation of home component
+//TODO Move to profile component
 
 export default class TestScreen extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -18,27 +16,38 @@ export default class TestScreen extends React.Component {
             newPassword: "",
             newEmail: "",
         };
+
     }
 
-    onSignoutPress = () => {
+    isLoggedByFacebook = () => {
+        const provider = firebase.auth().currentUser.providerData[0].providerId;
+        console.log(provider);
+        return provider !== 'password';
+    };
+
+    onSignOutPress = () => {
         firebase.auth().signOut();
     };
 
 
     reauthenticate = (currentPassword) => {
-        var user = firebase.auth().currentUser;
-        var cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+        const user = firebase.auth().currentUser;
+        const cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
         return user.reauthenticateWithCredential(cred);
     };
 
 
     onChangePasswordPress = () => {
         this.reauthenticate(this.state.currentPassword).then(() => {
-            var user = firebase.auth().currentUser;
+            const user = firebase.auth().currentUser;
             user.updatePassword(this.state.newPassword).then(() => {
                 Alert.alert("Password was changed");
-            }).catch((error) => { console.log(error.message); });
-        }).catch((error) => { console.log(error.message) });
+            }).catch((error) => {
+                console.log(error.message);
+            });
+        }).catch((error) => {
+            console.log(error.message)
+        });
     };
 
 
@@ -47,41 +56,65 @@ export default class TestScreen extends React.Component {
             var user = firebase.auth().currentUser;
             user.updateEmail(this.state.newEmail).then(() => {
                 Alert.alert("Email was changed");
-            }).catch((error) => { console.log(error.message); });
-        }).catch((error) => { console.log(error.message) });
+            }).catch((error) => {
+                console.log(error.message);
+            });
+        }).catch((error) => {
+            console.log(error.message)
+        });
     };
 
     render() {
+        if (this.isLoggedByFacebook === true) {
+            return (
+                <ScrollView style={{flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10,}}>
+                    <Button title={'Wyloguj'} onPress={this.onSignOutPress}/>
+                </ScrollView>
+            )
+        }
         return (
             <ScrollView style={{flex: 1, flexDirection: "column", paddingVertical: 50, paddingHorizontal: 10,}}>
-                <Button title="Sign out" onPress={this.onSignoutPress} />
+                <Button title="Wyloguj" onPress={this.onSignOutPress}/>
 
                 <TextInput style={styles.textInput} value={this.state.currentPassword}
-                           placeholder="Current Password" autoCapitalize="none" secureTextEntry={true}
-                           onChangeText={(text) => { this.setState({currentPassword: text}) }}
+                           placeholder="Obecne hasło" autoCapitalize="none" secureTextEntry={true}
+                           onChangeText={(text) => {
+                               this.setState({currentPassword: text})
+                           }}
                 />
 
                 <TextInput style={styles.textInput} value={this.state.newPassword}
-                           placeholder="New Password" autoCapitalize="none" secureTextEntry={true}
-                           onChangeText={(text) => { this.setState({newPassword: text}) }}
+                           placeholder="Nowe hasło" autoCapitalize="none" secureTextEntry={true}
+                           onChangeText={(text) => {
+                               this.setState({newPassword: text})
+                           }}
                 />
 
-                <Button title="Change Password" onPress={this.onChangePasswordPress} />
+                <Button title="Zmień hasło" onPress={this.onChangePasswordPress}/>
 
                 <TextInput style={styles.textInput} value={this.state.newEmail}
-                           placeholder="New Email" autoCapitalize="none" keyboardType="email-address"
-                           onChangeText={(text) => { this.setState({newEmail: text}) }}
+                           placeholder="Nowy email" autoCapitalize="none" keyboardType="email-address"
+                           onChangeText={(text) => {
+                               this.setState({newEmail: text})
+                           }}
                 />
 
-                <Button title="Change Email" onPress={this.onChangeEmailPress} />
+                <Button title="Zmień email" onPress={this.onChangeEmailPress}/>
 
             </ScrollView>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
-    text: { color: "white", fontWeight: "bold", textAlign: "center", fontSize: 20, },
-    textInput: { borderWidth: 1, borderColor:"gray", marginVertical: 20, padding: 10, height: 40, alignSelf: "stretch", fontSize: 18, },
+    text: {color: "white", fontWeight: "bold", textAlign: "center", fontSize: 20,},
+    textInput: {
+        borderWidth: 1,
+        borderColor: "gray",
+        marginVertical: 20,
+        padding: 10,
+        height: 40,
+        alignSelf: "stretch",
+        fontSize: 18,
+    },
 });
