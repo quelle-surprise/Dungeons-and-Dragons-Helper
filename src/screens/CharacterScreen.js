@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ListView, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import { Container, Content, Button, Icon, ListItem, List  } from 'native-base'
 import * as firebase from 'firebase';
-
+import HeaderComponent from '../components/HeaderComponent';
 var data = []
 
 export default class CharacterScreen extends React.Component {
@@ -53,6 +53,7 @@ export default class CharacterScreen extends React.Component {
     if (this.state.dataLoaded) {
     return (
       <Container style={styles.container}>
+      <HeaderComponent/>
         <Content>
           <List
             enableEmptySections
@@ -83,10 +84,11 @@ export default class CharacterScreen extends React.Component {
          </TouchableOpacity>
 
       </Container>
-    );
+      );
   } else {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <HeaderComponent />
             <ActivityIndicator size="large"/>
         </View>
     )
