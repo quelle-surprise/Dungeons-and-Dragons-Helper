@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 import {Facebook} from 'expo';
 import {SocialIcon} from "react-native-elements";
 
-const fbAppId = 'PUT YOUR OWN FB APP ID';
+const fbAppId = '409985276395742';
 
 export default class LoginScreen extends React.Component {
 
