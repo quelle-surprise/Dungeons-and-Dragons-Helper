@@ -3,11 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import ApiKeys from './src/constants/ApiKeys';
 import * as firebase from 'firebase';
 import AuthenticationNavigation from "./src/navigation/AuthenticationNavigation";
-import TestScreen from "./src/screens/TestScreen";
-import SkillsScreen from "./src/screens/skills/SkillsScreen";
-import SpellsScreen from "./src/screens/spells/SpellsScreen";
-import MonstersScreen from "./src/screens/monsters/MonstersScreen";
-
+import DashboardNavigation from "./src/navigation/DashboardNavigation.js";
 export default class App extends React.Component {
 
   constructor(props) {
@@ -30,7 +26,7 @@ export default class App extends React.Component {
 
   render() {
     if(this.state.isAuthenticated) {
-      return(<MonstersScreen/>)
+      return(<DashboardNavigation/>)
     } else {
       return (
           <AuthenticationNavigation/>
