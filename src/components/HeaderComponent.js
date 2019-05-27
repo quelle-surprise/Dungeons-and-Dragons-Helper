@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, Image, Alert} from 'react-native';
 import * as firebase from 'firebase';
 
 
@@ -9,11 +9,15 @@ export default class HeaderComponent extends React.Component {
     super(props);
   }
 
+  redirectToProfile() {
+    Alert.alert("This should redirect to character creation");
+  }
+
   render() {
     return (
       <View style={styles.navbar}>
         <View style={styles.rightContainer}>
-          <Text style={styles.text}>
+          <Text style={styles.text} onPress={() => this.redirectToProfile()}>
                 <Text style={{justifyContent: 'center'}}> {firebase.auth().currentUser.email} </Text>
                 <Image  
                     style={{width: 50, height: 50}}

@@ -53,7 +53,6 @@ export default class CharacterScreen extends React.Component {
     if (this.state.dataLoaded) {
     return (
       <Container style={styles.container}>
-      <HeaderComponent/>
         <Content>
           <List
             enableEmptySections
