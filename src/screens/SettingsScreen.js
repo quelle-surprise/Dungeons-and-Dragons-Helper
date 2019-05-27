@@ -2,12 +2,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, TextInput, Button, Alert, Text, View} from 'react-native';
 import * as firebase from 'firebase';
 
-/***
- Test screen to test authentication functionality, it needs to be moved to profile component after creation.
- */
-//TODO Move to profile component
-
-export default class TestScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
 
     constructor(props) {
         super(props);

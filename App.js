@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { Container } from 'native-base'
+import { StyleSheet } from 'react-native';
 import ApiKeys from './src/constants/ApiKeys';
 import * as firebase from 'firebase';
 import AuthenticationNavigation from "./src/navigation/AuthenticationNavigation";
-import HeaderComponent from "./src/components/HeaderComponent";
 import DashboardNavigation from './src/navigation/DashboardNavigation';
 
 export default class App extends React.Component {
@@ -30,10 +28,7 @@ export default class App extends React.Component {
   render() {
     if(this.state.isAuthenticated) {
       return(
-        <Container>
-          <HeaderComponent/>
           <DashboardNavigation/>
-        </Container>
         )
     } else {
       return (
@@ -42,6 +37,7 @@ export default class App extends React.Component {
     }
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

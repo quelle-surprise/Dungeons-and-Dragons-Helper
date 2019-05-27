@@ -42,7 +42,7 @@ export default class CharacterScreen extends React.Component {
 
 
     FloatingButtonEvent=()=>{
-        Alert.alert("This should redirect to character creation");
+      this.props.navigation.navigate('CharacterDisplayScreen')
     }
 
     CharacterClickEvent=(name)=>{

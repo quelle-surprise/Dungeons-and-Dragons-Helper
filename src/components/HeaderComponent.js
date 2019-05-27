@@ -10,21 +10,18 @@ export default class HeaderComponent extends React.Component {
   }
 
   redirectToProfile() {
-    Alert.alert("This should redirect to character creation");
   }
 
   render() {
     return (
       <View style={styles.navbar}>
-        <View style={styles.rightContainer}>
-          <Text style={styles.text} onPress={() => this.redirectToProfile()}>
+          <Text style={styles.text}>
                 <Text style={{justifyContent: 'center'}}> {firebase.auth().currentUser.email} </Text>
                 <Image  
                     style={{width: 50, height: 50}}
                     source={require('../../assets/user.png')}
                 />
-            </Text>  
-        </View>              
+            </Text>            
       </View>
     )
   }
@@ -32,21 +29,16 @@ export default class HeaderComponent extends React.Component {
 
 const styles = StyleSheet.create({
   navbar: {
-    backgroundColor: 'white',
     borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    height: 70,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   text: {
     fontSize: 18,
     flexDirection:'row',
     flexWrap:'wrap',
     paddingBottom: 20
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   }
 });
