@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { Container } from 'native-base'
 import ApiKeys from './src/constants/ApiKeys';
 import * as firebase from 'firebase';
 import AuthenticationNavigation from "./src/navigation/AuthenticationNavigation";
-import DashboardNavigation from "./src/navigation/DashboardNavigation.js";
+import HeaderComponent from "./src/components/HeaderComponent";
+import DashboardNavigation from './src/navigation/DashboardNavigation';
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -26,7 +29,12 @@ export default class App extends React.Component {
 
   render() {
     if(this.state.isAuthenticated) {
-      return(<DashboardNavigation/>)
+      return(
+        <Container>
+          <HeaderComponent/>
+          <DashboardNavigation/>
+        </Container>
+        )
     } else {
       return (
           <AuthenticationNavigation/>
