@@ -3,19 +3,25 @@ import TestScreen from '../screens/TestScreen';
 import {
     createAppContainer,
     createBottomTabNavigator,
+    createStackNavigator
 } from 'react-navigation';
-import SkillsScreen from "../screens/skills/SkillsScreen";
+import FeaturesScreen from "../screens/features/FeaturesScreen";
 import SpellsScreen from "../screens/spells/SpellsScreen";
 import MonstersScreen from "../screens/monsters/MonstersScreen";
+import FeatureScreen from "../screens/features/FeatureScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator({
     TestScreen: {screen: TestScreen},
-    SkillsScreen: {screen: SkillsScreen},
+    FeaturesScreen: {screen: FeaturesScreen},
     SpellsScreen: {screen: SpellsScreen},
     MonstersScreen: {screen: MonstersScreen}
 });
 
-const DashboardContainer = createAppContainer(DashboardTabNavigator);
+const DashboardStackNavigator = createStackNavigator({
+    DashboardTabNavigator: DashboardTabNavigator,
+    FeatureScreen: {screen: FeatureScreen}
+});
+const DashboardContainer = createAppContainer(DashboardStackNavigator);
 
 export default class DashboardNavigation extends React.Component {
 

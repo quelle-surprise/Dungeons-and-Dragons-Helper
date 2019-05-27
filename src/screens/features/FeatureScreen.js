@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
  */
 //TODO Move to profile component
 
-export default class SkillScreen extends React.Component {
+export default class FeatureScreen extends React.Component {
 
     constructor(props) {
         super(props);
