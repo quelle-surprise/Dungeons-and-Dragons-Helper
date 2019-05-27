@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
 
 
-class SpellsScreen extends Component {
+class SpellsScreen extends PureComponent {
     constructor(props) {
         super(props);
 

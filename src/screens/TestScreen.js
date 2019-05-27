@@ -46,10 +46,10 @@ export default class TestScreen extends React.Component {
             user.updatePassword(this.state.newPassword).then(() => {
                 Alert.alert("Password was changed");
             }).catch((error) => {
-                console.log(error.message);
+                Alert.alert("error");
             });
         }).catch((error) => {
-            console.log(error.message)
+            Alert.alert("error");
         });
     };
 
@@ -60,10 +60,10 @@ export default class TestScreen extends React.Component {
             user.updateEmail(this.state.newEmail).then(() => {
                 Alert.alert("Email was changed");
             }).catch((error) => {
-                console.log(error.message);
+                Alert.alert("error");
             });
         }).catch((error) => {
-            console.log(error.message)
+            Alert.alert("error");
         });
     };
 

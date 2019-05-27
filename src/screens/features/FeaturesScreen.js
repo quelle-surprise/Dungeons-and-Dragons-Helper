@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
-import {NavigationScreenProp as navigation} from "react-navigation";
 
-class SkillScreen extends Component {
+
+export default class FeaturesScreen extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -22,7 +22,7 @@ class SkillScreen extends Component {
 
     makeRemoteRequest = () => {
 
-        const url = `http://www.dnd5eapi.co/api/skills/`;
+        const url = `http://www.dnd5eapi.co/api/features/`;
 
         this.setState({ loading: true });
 
@@ -66,6 +66,7 @@ class SkillScreen extends Component {
                             title={`${item.name}`}
                             subtitle={item.url}
                             iconRight
+                            onPress = {() => this.props.navigation.navigate('FeatureScreen')}
                         />
                     )}
                     keyExtractor={item => item.url}
@@ -76,5 +77,3 @@ class SkillScreen extends Component {
         );
     }
 }
-
-export default SkillScreen;
