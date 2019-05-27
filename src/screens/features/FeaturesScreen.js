@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList } from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
 
