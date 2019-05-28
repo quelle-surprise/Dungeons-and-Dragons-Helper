@@ -108,15 +108,13 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
         },
         tabBarPosition: 'bottom',
         swipeEnabled: true,
-    },
-{
-    navigationOptions: ({ navigation }) => {
-        [navigation.state.index];
-        return {
-            headerTitle: <HeaderComponent/>
-        };
-    }
-});
+        navigationOptions: ({ navigation }) => {
+            [navigation.state.index];
+            return {
+                headerTitle: <HeaderComponent/>
+            };
+        }
+    });
 
 const DashboardStackNavigator = createStackNavigator({
     DashboardTabNavigator: DashboardTabNavigator,
