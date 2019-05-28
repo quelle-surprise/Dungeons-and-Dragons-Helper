@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    createAppContainer,
-    createBottomTabNavigator,
-    createStackNavigator
-} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import FeaturesScreen from "../screens/features/FeaturesScreen";
 import FeatureScreen from "../screens/features/FeatureScreen";
 import CharacterScreen from '../screens/CharacterScreen';
@@ -13,97 +9,86 @@ import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
 import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
 import SpellsScreen from "../screens/spells/SpellsScreen";
 import Icons from "assets/icons";
-import { Image, Text, View } from "react-native";
+import {Image} from "react-native";
 import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator({
-    // TestScreen: {
-    //     screen: TestScreen,
-    //     navigationOptions: {
-    //         tabBarIcon: ({ tintColor }) => {
-    //             return(
-    //                 <Image 
-    //                     source = {Icons.bottomTabNavigatorIcons.skills}
-    //                 />
-    //             );
-    //         }
-    //     }
-    // },
-    CharacterScreen: {
-        screen: CharacterScreen,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => {
-                return(
-                    <Image
-                        source = {Icons.bottomTabNavigatorIcons.chars}
-                    />
-                );
+        CharacterScreen: {
+            screen: CharacterScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.chars}
+                        />
+                    );
+                }
             }
+        },
+        RollDiceScreen: {
+            screen: RollDiceScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.dice}
+                        />
+                    );
+                }
+            }
+        },
+        FeaturesScreen: {
+            screen: FeaturesScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.skills}
+                        />
+                    );
+                }
+            }
+        },
+        SpellsScreen: {
+            screen: SpellsScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.spells}
+                        />
+                    );
+                }
+            }
+        },
+        MonstersScreen: {
+            screen: MonstersScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.monsters}
+                        />
+                    );
+                }
+            }
+        },
+    },
+    {
+        navigationOptions: ({navigation}) => {
+            [navigation.state.index];
+            return {
+                headerTitle: <HeaderComponent/>
+            };
         }
     },
-    RollDiceScreen: {
-        screen: RollDiceScreen,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => {
-                return(
-                    <Image 
-                        source = {Icons.bottomTabNavigatorIcons.dice}
-                    />
-                );
-            }
-        }
-    },
-    FeaturesScreen: {
-        screen: FeaturesScreen,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => {
-                return(
-                    <Image 
-                        source = {Icons.bottomTabNavigatorIcons.skills}
-                    />
-                );
-            }
-        }
-    },
-    SpellsScreen: {
-        screen: SpellsScreen,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => {
-                return(
-                    <Image 
-                        source = {Icons.bottomTabNavigatorIcons.spells}
-                    />                    
-                );
-            }
-        }
-    },
-    MonstersScreen: {
-        screen: MonstersScreen,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => {
-                return(
-                    <Image 
-                        source = {Icons.bottomTabNavigatorIcons.monsters}
-                    />
-                );
-            }
-        }
-    },        
-},
-    {tabBarOptions: {
-        showLabel: false,
-        paddingVertical: 10
-    },
-},
-{
-    navigationOptions: ({ navigation }) => {
-        [navigation.state.index];
-        return {
-            headerTitle: <HeaderComponent/>
-        };
-    }
-});
+    {
+        tabBarOptions: {
+            showLabel: false,
+            paddingVertical: 10
+        },
+    });
 
 const DashboardStackNavigator = createStackNavigator({
     DashboardTabNavigator: DashboardTabNavigator,
@@ -120,6 +105,6 @@ export default class DashboardNavigation extends React.Component {
     render() {
         return (
             <DashboardContainer/>
-        ) 
+        )
     }
 }
