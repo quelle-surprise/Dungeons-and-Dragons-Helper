@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import { View, FlatList} from "react-native";
-import {ListItem, SearchBar } from "react-native-elements";
-import { List } from "native-base";
+import React, {PureComponent} from "react";
+import {FlatList, View} from "react-native";
+import {ListItem, SearchBar} from "react-native-elements";
+import {List} from "native-base";
 
 
 class MonstersScreen extends PureComponent {
@@ -24,7 +24,7 @@ class MonstersScreen extends PureComponent {
 
         const url = `http://www.dnd5eapi.co/api/monsters/`;
 
-        this.setState({ loading: true });
+        this.setState({loading: true});
 
         fetch(url)
             .then(res => res.json())
@@ -37,7 +37,7 @@ class MonstersScreen extends PureComponent {
                 });
             })
             .catch(error => {
-                this.setState({ error, loading: false });
+                this.setState({error, loading: false});
             });
     };
 
@@ -53,19 +53,22 @@ class MonstersScreen extends PureComponent {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round />;
+        return <SearchBar placeholder="Type Here..." lightTheme round/>;
     };
 
     render() {
         return (
-            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+            <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>
                 <FlatList
                     data={this.state.data}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                         <ListItem
                             title={`${item.name}`}
-                            subtitle={item.url}
                             iconRight
+                            onPress={() => this.props.navigation.navigate('MonsterScreen', {
+                                url: item.url
+                            })
+                            }
                         />
                     )}
                     keyExtractor={item => item.url}

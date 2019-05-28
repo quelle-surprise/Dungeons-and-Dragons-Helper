@@ -5,6 +5,7 @@ import { List } from "native-base";
 
 
 class SpellsScreen extends PureComponent {
+
     constructor(props) {
         super(props);
 
@@ -82,6 +83,10 @@ class SpellsScreen extends PureComponent {
                             title={`${item.name}`}
                             subtitle={item.url}
                             iconRight
+                            onPress = {() => this.props.navigation.navigate('SpellScreen', {
+                                url: item.url
+                            })
+                            }
                         />
                     )}
                     keyExtractor={item => item.url}

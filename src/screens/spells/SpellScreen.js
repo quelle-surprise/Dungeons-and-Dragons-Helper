@@ -2,7 +2,7 @@ import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 
 
-export default class FeatureScreen extends React.Component {
+export default class SpellScreen extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -41,12 +41,9 @@ export default class FeatureScreen extends React.Component {
                 </View>
             )
         }
-        return (
-            <View>
-                <Text>{this.state.data.name}</Text>
-                <Text>{this.state.data.level}</Text>
 
-            </View>
+        return (
+            <Text>{this.state.data.name}</Text>
         )
 
     }

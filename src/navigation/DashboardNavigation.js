@@ -14,6 +14,8 @@ import SettingsScreen from "../screens/SettingsScreen";
 import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
 import RollDiceScreen from "../screens/diceRoll/DiceRollScreen";
 import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
+import SpellScreen from "../screens/spells/SpellScreen";
+import MonsterScreen from "../screens/monsters/MonsterScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator({
     CharacterScreen: {screen: CharacterScreen},
@@ -35,6 +37,8 @@ const DashboardTabNavigator = createBottomTabNavigator({
 const DashboardStackNavigator = createStackNavigator({
     DashboardTabNavigator: DashboardTabNavigator,
     FeatureScreen: {screen: FeatureScreen},
+    MonsterScreen: {screen: MonsterScreen},
+    SpellScreen: {screen: SpellScreen},
     HeaderComponent: {screen: HeaderComponent},
     SettingsScreen: {screen: SettingsScreen},
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},

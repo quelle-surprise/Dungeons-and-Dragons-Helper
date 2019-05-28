@@ -64,9 +64,11 @@ export default class FeaturesScreen extends PureComponent {
                     renderItem={({ item }) => (
                         <ListItem
                             title={`${item.name}`}
-                            subtitle={item.url}
                             iconRight
-                            onPress = {() => this.props.navigation.navigate('FeatureScreen')}
+                            onPress = {() => this.props.navigation.navigate('FeatureScreen', {
+                                url: item.url
+                            })
+                            }
                         />
                     )}
                     keyExtractor={item => item.url}
