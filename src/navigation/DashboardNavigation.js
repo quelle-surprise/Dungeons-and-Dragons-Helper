@@ -4,6 +4,7 @@ import {
     createBottomTabNavigator,
     createStackNavigator
 } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation'
 import FeaturesScreen from "../screens/features/FeaturesScreen";
 import FeatureScreen from "../screens/features/FeatureScreen";
 import CharacterScreen from '../screens/CharacterScreen';
@@ -17,7 +18,7 @@ import { Image, Text, View } from "react-native";
 import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 
-const DashboardTabNavigator = createBottomTabNavigator({
+const DashboardTabNavigator = createMaterialTopTabNavigator({
     // TestScreen: {
     //     screen: TestScreen,
     //     navigationOptions: {
@@ -91,11 +92,24 @@ const DashboardTabNavigator = createBottomTabNavigator({
         }
     },        
 },
-    {tabBarOptions: {
-        showLabel: false,
-        paddingVertical: 10
+    {
+        tabBarOptions: {
+            showLabel: false,
+            activeTintColor: 'orange',
+            inactiveTintColor: 'grey',
+            style: {
+                backgroundColor: '#f2f2f2',
+                borderTopWidth: 0.5,
+                borderTopColor: 'grey'
+            },
+            indicatorStyle: {
+                height: 0
+            },
+            showIcon: true
+        },
+        tabBarPosition: 'bottom',
+        swipeEnabled: true,
     },
-},
 {
     navigationOptions: ({ navigation }) => {
         [navigation.state.index];
