@@ -12,12 +12,15 @@ import FeatureScreen from "../screens/features/FeatureScreen";
 import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
+import RollDiceScreen from "../screens/diceRoll/DiceRollScreen";
+import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator({
     CharacterScreen: {screen: CharacterScreen},
     FeaturesScreen: {screen: FeaturesScreen},
     SpellsScreen: {screen: SpellsScreen},
-    MonstersScreen: {screen: MonstersScreen}
+    MonstersScreen: {screen: MonstersScreen},
+    RollDice: {screen: RollDiceScreen}
 },
 {
     navigationOptions: ({ navigation }) => {
@@ -34,7 +37,8 @@ const DashboardStackNavigator = createStackNavigator({
     FeatureScreen: {screen: FeatureScreen},
     HeaderComponent: {screen: HeaderComponent},
     SettingsScreen: {screen: SettingsScreen},
-    CharacterDisplayScreen: {screen: CharacterDisplayScreen}
+    CharacterDisplayScreen: {screen: CharacterDisplayScreen},
+    DiceRollResultScreen: {screen: DiceRollResultScreen}
 });
 const DashboardContainer = createAppContainer(DashboardStackNavigator);
 
