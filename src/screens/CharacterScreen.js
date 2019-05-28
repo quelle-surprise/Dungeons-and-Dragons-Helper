@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, ListView, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import { Container, Content, Button, Icon, ListItem, List  } from 'native-base'
 import * as firebase from 'firebase';
-import HeaderComponent from '../components/HeaderComponent';
 var data = []
 
 export default class CharacterScreen extends React.Component {
@@ -45,8 +44,11 @@ export default class CharacterScreen extends React.Component {
       this.props.navigation.navigate('CharacterDisplayScreen')
     }
 
-    CharacterClickEvent=(name)=>{
-        Alert.alert("Redirect to character information screen. You clicked on " + name);
+    CharacterClickEvent=(character)=>{
+      //this.props.navigation.navigate('CharacterDisplayScreen')
+      this.props.navigation.navigate('CharacterDisplayScreen', {
+        character: character,
+      });
     }
 
   render() {
@@ -58,7 +60,7 @@ export default class CharacterScreen extends React.Component {
             enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
             renderRow={data =>
-              <ListItem onPress={() => this.CharacterClickEvent(data.val().name)}>
+              <ListItem onPress={() => this.CharacterClickEvent(data.val())}>
                <View style={styles.flatview}>
                     <Image  
                         style={{width: 50, height: 50}}
@@ -87,7 +89,6 @@ export default class CharacterScreen extends React.Component {
   } else {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <HeaderComponent />
             <ActivityIndicator size="large"/>
         </View>
     )
