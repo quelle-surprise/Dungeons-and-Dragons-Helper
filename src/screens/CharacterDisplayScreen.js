@@ -1,17 +1,14 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, ListView, Image, Alert, ActivityIndicator, FlatList } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, Alert, FlatList } from 'react-native';
 import { ListItem } from 'native-base'
 import { Table, Row, Rows } from 'react-native-table-component';
 import {
   Container,
   Fab,
   IconNB,
-  Left,
-  Right,
   View,
   Segment,
   Button,
-  List
 } from "native-base";
 
 export default class CharacterDisplayScreen extends React.Component {
@@ -22,47 +19,45 @@ export default class CharacterDisplayScreen extends React.Component {
       character: [],
       seg: 1,
       tableHead: ['Str', 'Agility', 'Stamina', 'Int', 'Know', 'Char'],
-      tableData: [],
-      proficiencyData: []
+      statisticsTableData: [],
+      proficiencyTableData: []
     };
     const { navigation } = this.props;
     this.state.character = navigation.getParam('character', [""]);
     console.disableYellowBox = true
-    this.generateStatisticsList()
+    this.generateStatisticsTable()
   }
 
-    generateStatisticsList=()=>{
+  componentDidMount(){
+    
+  }
+
+  generateStatisticsTable=()=>{
     let character = this.state.character
-    let statisticsList = []
-    statisticsList.push(character.strength)
-    statisticsList.push(character.agility)
-    statisticsList.push(character.condition)
-    statisticsList.push(character.intelligence)
-    statisticsList.push(character.knowledge)
-    statisticsList.push(character.charisma)
-    this.generateTableWithModifiers(statisticsList)
+    let statistics = [
+      character.strength, character.agility,
+      character.condition,character.intelligence,
+      character.knowledge,character.charisma]
+    this.generateTableWithModifiersRow(statistics)
   }
 
-  generateTableWithModifiers = (statisticsList) => {
-    let table = []
-    let modifiersList = []
-    statisticsList.forEach(element => {
-      modifiersList.push(Math.floor((element-10)/2))
+  generateTableWithModifiersRow = (statistics) => {
+    let modifiers = []
+    statistics.forEach(stat => {
+      modifiers.push(Math.floor((stat-10)/2))
     });
-    table.push(statisticsList)
-    table.push(modifiersList)
-    this.state.tableData = table
-    this.generateProficiencyTable(modifiersList)
+    this.state.statisticsTableData = [statistics,modifiers]
+    this.generateProficiencyTable(modifiers)
   }
 
-  generateProficiencyTable = (modifiersList) => {
-    let proficiencyList = []
-    modifiersList.forEach(element => {
-      proficiencyList.push(element+this.state.character.proficiency)
+  generateProficiencyTable = (modifiers) => {
+    let proficiency = []
+    modifiers.forEach(modifier => {
+      proficiency.push(modifier + this.state.character.proficiency)
     });
-    console.log('prof list' + proficiencyList)
-    this.state.proficiencyData.push(proficiencyList)
+    this.state.proficiencyTableData.push(proficiency)
   }
+
   render() {
       return (
       <Container style={styles.container}>
@@ -123,14 +118,14 @@ export default class CharacterDisplayScreen extends React.Component {
           <View>
             <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
               <Row data={this.state.tableHead} style={styles.head} textStyle={styles.details}/>
-              <Rows data={this.state.tableData} textStyle={styles.details}/>
+              <Rows data={this.state.statisticsTableData} textStyle={styles.details}/>
             </Table>
 
             <Text style={styles.details}>Premia z biegłości: {this.state.character.proficiency}</Text>
             <Text style={styles.details}>Rzuty obronne</Text>
 
             <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-              <Rows data={this.state.proficiencyData} textStyle={styles.details}/>
+              <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
             </Table>
           </View>
         }
@@ -166,7 +161,6 @@ export default class CharacterDisplayScreen extends React.Component {
     ) 
 }
 }
-
 
 const styles = StyleSheet.create({
   container: {
