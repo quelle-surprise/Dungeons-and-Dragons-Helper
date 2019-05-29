@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ListView, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import { Container, Content, ListItem, List  } from 'native-base'
 import * as firebase from 'firebase';
-
+import Icons from "assets/icons";
 var data = []
 
 export default class CharacterScreen extends React.Component {
@@ -99,7 +99,7 @@ export default class CharacterScreen extends React.Component {
                <View style={styles.flatview}>
                     <Image  
                         style={{width: 50, height: 50}}
-                        source={require('../../assets/character.png')}
+                        source={Icons.charScreenIcons.characterIcon}
                     />
                     <Text style={styles.details}> {data.val().name},</Text>
                     <Text style={styles.details}> {data.val().characterClass} poziomu {data.val().level}</Text>
@@ -112,7 +112,7 @@ export default class CharacterScreen extends React.Component {
         </Content>
 
          <TouchableOpacity activeOpacity={0.5} onPress={this.FloatingButtonEvent} style={styles.TouchableOpacityStyle} >
-           <Image source={require('../../assets/button.png')}  style={styles.FloatingButtonStyle} />
+           <Image source={Icons.charScreenIcons.plus}  style={styles.FloatingButtonStyle} />
          </TouchableOpacity>
 
       </Container>

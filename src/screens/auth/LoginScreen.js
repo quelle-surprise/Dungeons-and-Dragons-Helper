@@ -12,6 +12,7 @@ import {
 import * as firebase from 'firebase';
 import {Facebook} from 'expo';
 import {SocialIcon} from "react-native-elements";
+import Icons from "assets/icons";
 
 const fbAppId = '409985276395742';
 
@@ -58,7 +59,7 @@ export default class LoginScreen extends React.Component {
         if (this.state.fontLoaded) {
             return (
                 <View style={{paddingTop: 20, alignItems: "center"}}>
-                    <Image source={require('../../../assets/dnd-logo.png')} style={{width: 200, height: 200}}
+                    <Image source={Icons.imagesIcons.dndLogo} style={{width: 200, height: 200}}
                     />
                     <TextInput style={styles.textInput}
                                value={this.state.email}

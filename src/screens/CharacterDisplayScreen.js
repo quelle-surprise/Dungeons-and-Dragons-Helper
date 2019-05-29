@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, Alert, FlatList, Image } from 'react-native';
 import { ListItem } from 'native-base'
 import { Table, Row, Rows } from 'react-native-table-component';
 import {
@@ -10,6 +10,7 @@ import {
   Segment,
   Button,
 } from "native-base";
+import Icons from "assets/icons";
 
 export default class CharacterDisplayScreen extends React.Component {
   constructor(props) {
@@ -70,11 +71,12 @@ export default class CharacterDisplayScreen extends React.Component {
           <Text style={styles.name}> Poziom {this.state.character.level}</Text>
               <Fab
                 containerStyle={{}}
-                style={{ backgroundColor: "#5067FF" }}
+                style={{ backgroundColor: "transparent", elevation: 0 }}
                 position="topRight"
                 onPress={() => this.shareCharacterEvent(this.state.characterId)}
               >
-                <IconNB name="md-share" />
+                {/* <IconNB name="md-share" /> */}
+                <View><Image source={Icons.charScreenIcons.share} /></View>                
               </Fab>
             </View>
             
