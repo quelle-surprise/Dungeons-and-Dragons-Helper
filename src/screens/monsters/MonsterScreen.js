@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, ScrollView, FlatList} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, ScrollView, FlatList, View} from 'react-native';
 import { Table, Row} from 'react-native-table-component';
 import { ListItem } from 'react-native-elements';
 
