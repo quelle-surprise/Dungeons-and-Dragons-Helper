@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import React, { PureComponent } from "react";
+import { View, FlatList} from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
-import {NavigationScreenProp as navigation} from "react-navigation";
 
-class MonstersScreen extends Component {
+
+class MonstersScreen extends PureComponent {
     constructor(props) {
         super(props);
 
