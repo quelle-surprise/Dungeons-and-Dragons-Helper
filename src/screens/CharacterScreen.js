@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ListView, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
-import { Container, Content, Button, Icon, ListItem, List  } from 'native-base'
+import { Container, Content, ListItem, List  } from 'native-base'
 import * as firebase from 'firebase';
 import Icons from "assets/icons";
 var data = []
@@ -9,13 +9,12 @@ export default class CharacterScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
         this.state = {
         listViewData: data,
         newContact: "",
         dataLoaded: false
         }
-        console.disableYellowBox = true
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     }
 
     async componentDidMount() {
@@ -42,16 +41,48 @@ export default class CharacterScreen extends React.Component {
 
 
     FloatingButtonEvent=()=>{
-      this.props.navigation.navigate('CharacterDisplayScreen')
+      Alert.alert("Doesnt work")
     }
 
-    CharacterClickEvent=(character)=>{
-      //this.props.navigation.navigate('CharacterDisplayScreen')
+    characterClickEvent=(character, characterId)=>{
       this.props.navigation.navigate('CharacterDisplayScreen', {
         character: character,
+        characterId: characterId
       });
     }
 
+    shareCharacterEvent=(chadacterId)=>{
+      this.props.navigation.navigate('ShareCharacterScreen', {
+        characterId: chadacterId,
+      });
+    }
+  
+
+    characterLongPress=(secId, rowId, rowMap, data)=>{
+      Alert.alert(
+        'Wybierz akcje',
+        'Możliwe opcje do wyboru:',
+        [
+          {text: 'Powrót', onPress: () => console.log('Return')},
+          {text: 'Usuń postać', onPress: () => this.makeSure(secId, rowId, rowMap, data)},
+          {text: 'Udostępnij postać', onPress: () =>  this.shareCharacterEvent(data.key)}
+        ],
+        {cancelable: true}
+      )
+    }
+
+    makeSure=(secId, rowId, rowMap, data)=>{
+      Alert.alert(
+        'Jesteś pewien',
+        'Czy na pewno chcesz usunać postać?',
+        [
+          {text: 'Tak', onPress: () => this.deleteRow(secId, rowId, rowMap, data)},
+          {text: 'Nie', onPress: () => console.log("Return")}
+        ],
+        {cancelable: true}
+      )
+    }
+  
   render() {
     if (this.state.dataLoaded) {
     return (
@@ -60,8 +91,11 @@ export default class CharacterScreen extends React.Component {
           <List
             enableEmptySections
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            renderRow={data =>
-              <ListItem onPress={() => this.CharacterClickEvent(data.val())}>
+            renderRow={(data, secId, rowId, rowMap) =>
+              <ListItem 
+              onPress={() => this.characterClickEvent(data.val(), data.key)}
+              onLongPress={() => this.characterLongPress(secId, rowId, rowMap, data)}
+              >
                <View style={styles.flatview}>
                     <Image  
                         style={{width: 50, height: 50}}
@@ -72,12 +106,8 @@ export default class CharacterScreen extends React.Component {
                 </View>
               </ListItem>
             }
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger onPress={() => this.deleteRow(secId, rowId, rowMap, data)}>
-                <Icon name="trash" />
-              </Button>
-            }
-            rightOpenValue={-75}
+            renderLeftHiddenRow={() => {}}
+            leftOpenValue={0}
           />
         </Content>
 
@@ -104,10 +134,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
 
   },
+  wrapper: {
+    paddingTop: 50,
+    backgroundColor: "gray",
+    flex: 1
+  },
   title: {
     fontSize: 25,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  btn: {
+    margin: 10,
+    backgroundColor: "#3B5998",
+    color: "white",
+    padding: 10
+  },
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modal3: {
+    height: 500,
+    width: 300
   },
   TouchableOpacityStyle: {
     position: 'absolute',
