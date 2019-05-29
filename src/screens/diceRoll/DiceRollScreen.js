@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity } from 'react-native';
 import {Font} from "expo";
 import RNShake from 'react-native-shake';
+import Icons from "assets/icons";
 
 
   class DiceRollScreen extends React.Component {
@@ -42,7 +43,7 @@ import RNShake from 'react-native-shake';
           alignItems:'center',
           justifyContent:'center'
          }}>
-          <Image source={require('../../../assets/dnd-logo.png')} style={{width: 100, height: 100}}
+          <Image source={Icons.imagesIcons.diceImage} style={{width: 150, height: 150}}
           />
              <Text
              style={styles.buttonText}>

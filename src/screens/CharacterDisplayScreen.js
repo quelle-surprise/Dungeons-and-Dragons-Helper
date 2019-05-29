@@ -13,6 +13,7 @@ import {
   Button,
   List
 } from "native-base";
+import Icons from "assets/icons";
 
 export default class CharacterDisplayScreen extends React.Component {
   constructor(props) {
@@ -72,11 +73,12 @@ export default class CharacterDisplayScreen extends React.Component {
           <Text style={styles.name}> Poziom {this.state.character.level}</Text>
               <Fab
                 containerStyle={{}}
-                style={{ backgroundColor: "#5067FF" }}
+                style={{ backgroundColor: "transparent", elevation: 0 }}
                 position="topRight"
                 onPress={() => Alert.alert("Test")}
               >
-                <IconNB name="md-share" />
+                {/* <IconNB name="md-share" /> */}
+                <View><Image source={Icons.charScreenIcons.share} /></View>                
               </Fab>
             </View>
             

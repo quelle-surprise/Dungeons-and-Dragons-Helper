@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase';
+import Icons from "assets/icons";
 
 
 export default class HeaderComponent extends React.Component {
@@ -31,7 +32,7 @@ export default class HeaderComponent extends React.Component {
                 <Text style={{justifyContent: 'center'}}> {firebase.auth().currentUser.email} </Text>
                 <Image  
                     style={{width: 50, height: 50}}
-                    source={require('../../assets/user.png')}
+                    source={Icons.charScreenIcons.userIcon}
                 />
             </Text>            
       </View>
