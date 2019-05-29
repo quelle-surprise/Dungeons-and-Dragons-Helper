@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
-import { View, FlatList } from "react-native";
+import {View, FlatList, ActivityIndicator} from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
+import {Font} from "expo";
 
 
 export default class FeaturesScreen extends PureComponent {
@@ -16,11 +17,15 @@ export default class FeaturesScreen extends PureComponent {
         };
     }
 
-    componentDidMount() {
-        this.makeRemoteRequest();
+    async componentDidMount() {
+        this.fetchData();
+        await Font.loadAsync({
+            'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
+        });
+        this.setState({fontLoaded: true});
     }
 
-    makeRemoteRequest = () => {
+    fetchData = () => {
 
         const url = `http://www.dnd5eapi.co/api/features/`;
 
@@ -45,7 +50,7 @@ export default class FeaturesScreen extends PureComponent {
         return (
             <View
                 style={{
-                    height: 1,
+                    height: 0.5,
                     backgroundColor: "black",
                 }}
             />
@@ -56,6 +61,21 @@ export default class FeaturesScreen extends PureComponent {
         return <SearchBar placeholder="Type Here..." lightTheme round />;
     };
 
+    renderFooter = () => {
+        if (!this.state.loading) return null;
+
+        return (
+            <View
+                style={{
+                    paddingVertical: 20,
+                    borderTopWidth: 1,
+                    borderColor: "#CED0CE"
+                }}
+            >
+                <ActivityIndicator animating size="large" />
+            </View>
+        );
+    };
     render() {
         return (
             <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
@@ -64,14 +84,17 @@ export default class FeaturesScreen extends PureComponent {
                     renderItem={({ item }) => (
                         <ListItem
                             title={`${item.name}`}
-                            subtitle={item.url}
                             iconRight
-                            onPress = {() => this.props.navigation.navigate('FeatureScreen')}
+                            onPress = {() => this.props.navigation.navigate('FeatureScreen', {
+                                url: item.url
+                            })
+                            }
                         />
                     )}
                     keyExtractor={item => item.url}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
+                    ListFooterComponent={this.renderFooter}
                 />
             </List>
         );
