@@ -16,6 +16,7 @@ export default class CharacterDisplayScreen extends React.Component {
     super(props);
     this.state = {
       active: false,
+      characterId: "",
       character: [],
       seg: 1,
       tableHead: ['Str', 'Agility', 'Stamina', 'Int', 'Know', 'Char'],
@@ -24,12 +25,14 @@ export default class CharacterDisplayScreen extends React.Component {
     };
     const { navigation } = this.props;
     this.state.character = navigation.getParam('character', [""]);
-    console.disableYellowBox = true
+    this.state.characterId = navigation.getParam('characterId', "");
     this.generateStatisticsTable()
   }
 
-  componentDidMount(){
-    
+  shareCharacterEvent=(chadacterId)=>{
+    this.props.navigation.navigate('ShareCharacterScreen', {
+      characterId: chadacterId,
+    });
   }
 
   generateStatisticsTable=()=>{
@@ -69,7 +72,7 @@ export default class CharacterDisplayScreen extends React.Component {
                 containerStyle={{}}
                 style={{ backgroundColor: "#5067FF" }}
                 position="topRight"
-                onPress={() => Alert.alert("Test")}
+                onPress={() => this.shareCharacterEvent(this.state.characterId)}
               >
                 <IconNB name="md-share" />
               </Fab>
