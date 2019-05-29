@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import {View, Text, FlatList, ActivityIndicator, StyleSheet} from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
 import {Font} from "expo";
@@ -17,6 +17,7 @@ export default class SpellsScreen extends PureComponent {
             refreshing: false,
             fontLoaded: false
         };
+        this.arrayholder = [];
     }
 
     async componentDidMount() {
@@ -42,6 +43,7 @@ export default class SpellsScreen extends PureComponent {
                     loading: false,
                     refreshing: false
                 });
+                this.arrayholder = res.results;
             })
             .catch(error => {
                 this.setState({ error, loading: false });
@@ -52,7 +54,7 @@ export default class SpellsScreen extends PureComponent {
         return (
             <View
                 style={{
-                    height: 1,
+                    height: 0.5,
                     backgroundColor: "black",
                 }}
             />
@@ -60,7 +62,25 @@ export default class SpellsScreen extends PureComponent {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round />;
+        return <SearchBar
+            placeholder="Wprowadź nazwę zaklęcia"
+            lightTheme
+            inputStyle={styles.textInput}
+            onChangeText={text => this.searchFilterFunction(text)}
+            value={this.state.value}
+        />;
+    };
+
+    searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.name.toUpperCase()}`;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({data: newData});
     };
 
     renderFooter = () => {
@@ -88,6 +108,7 @@ export default class SpellsScreen extends PureComponent {
                         <ListItem
                             title={`${item.name}`}
                             iconRight
+                            titleStyle={styles.textInput}
                             onPress = {() => this.props.navigation.navigate('SpellScreen', {
                                 url: item.url
                             })
@@ -103,3 +124,11 @@ export default class SpellsScreen extends PureComponent {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    textInput: {
+        fontFamily: 'Toms Handwritten',
+        color: 'black',
+        fontSize: 30,
+    },
+});

@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
-import {ActivityIndicator, FlatList, View} from "react-native";
+import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
 import {ListItem, SearchBar} from "react-native-elements";
 import {List} from "native-base";
 import {Font} from "expo";
 
 
-class MonstersScreen extends PureComponent {
+export default class MonstersScreen extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -15,6 +15,7 @@ class MonstersScreen extends PureComponent {
             error: null,
             refreshing: false
         };
+        this.arrayholder = [];
     }
 
     async componentDidMount() {
@@ -40,6 +41,7 @@ class MonstersScreen extends PureComponent {
                     loading: false,
                     refreshing: false
                 });
+                this.arrayholder = res.results;
             })
             .catch(error => {
                 this.setState({error, loading: false});
@@ -50,7 +52,7 @@ class MonstersScreen extends PureComponent {
         return (
             <View
                 style={{
-                    height: 1,
+                    height: 0.5,
                     backgroundColor: "black",
                 }}
             />
@@ -58,7 +60,25 @@ class MonstersScreen extends PureComponent {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round/>;
+        return <SearchBar
+            placeholder="Wprowadź nazwę potwora"
+            lightTheme
+            inputStyle={styles.textInput}
+            onChangeText={text => this.searchFilterFunction(text)}
+            value={this.state.value}
+        />;
+    };
+
+    searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.name.toUpperCase()}`;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({data: newData});
     };
 
     renderFooter = () => {
@@ -76,7 +96,6 @@ class MonstersScreen extends PureComponent {
             </View>
         );
     };
-
     render() {
         return (
             <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>
@@ -85,6 +104,7 @@ class MonstersScreen extends PureComponent {
                     renderItem={({item}) => (
                         <ListItem
                             title={`${item.name}`}
+                            titleStyle={styles.textInput}
                             iconRight
                             onPress={() => this.props.navigation.navigate('MonsterScreen', {
                                 url: item.url
@@ -102,4 +122,10 @@ class MonstersScreen extends PureComponent {
     }
 }
 
-export default MonstersScreen;
+const styles = StyleSheet.create({
+    textInput: {
+        fontFamily: 'Toms Handwritten',
+        color: 'black',
+        fontSize: 30,
+    },
+});

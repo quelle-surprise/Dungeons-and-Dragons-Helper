@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import {View, FlatList, ActivityIndicator} from "react-native";
+import {View, FlatList, ActivityIndicator, StyleSheet} from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
 import {Font} from "expo";
@@ -15,6 +15,7 @@ export default class FeaturesScreen extends PureComponent {
             error: null,
             refreshing: false
         };
+        this.arrayholder = [];
     }
 
     async componentDidMount() {
@@ -40,6 +41,7 @@ export default class FeaturesScreen extends PureComponent {
                     loading: false,
                     refreshing: false
                 });
+                this.arrayholder = res.results;
             })
             .catch(error => {
                 this.setState({ error, loading: false });
@@ -58,7 +60,25 @@ export default class FeaturesScreen extends PureComponent {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round />;
+        return <SearchBar
+            placeholder="Wprowadź nazwę umiejętności"
+            lightTheme
+            inputStyle={styles.textInput}
+            onChangeText={text => this.searchFilterFunction(text)}
+            value={this.state.value}
+        />;
+    };
+
+    searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.name.toUpperCase()}`;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({data: newData});
     };
 
     renderFooter = () => {
@@ -84,6 +104,7 @@ export default class FeaturesScreen extends PureComponent {
                     renderItem={({ item }) => (
                         <ListItem
                             title={`${item.name}`}
+                            titleStyle={styles.textInput}
                             iconRight
                             onPress = {() => this.props.navigation.navigate('FeatureScreen', {
                                 url: item.url
@@ -100,3 +121,11 @@ export default class FeaturesScreen extends PureComponent {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    textInput: {
+        fontFamily: 'Toms Handwritten',
+        color: 'black',
+        fontSize: 30,
+    },
+});
