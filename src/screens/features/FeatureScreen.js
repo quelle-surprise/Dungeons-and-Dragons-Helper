@@ -12,6 +12,12 @@ export default class FeatureScreen extends React.Component {
         }
     }
 
+    async componentDidMount() {
+        await Font.loadAsync({
+            'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
+        });
+    }
+
     getData = () => {
         const {navigation} = this.props;
         const baseUrl = navigation.getParam('url');
