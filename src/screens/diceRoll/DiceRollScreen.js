@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import {Font} from "expo";
 import RNShake from 'react-native-shake';
 import Icons from "assets/icons";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
   class DiceRollScreen extends React.Component {
@@ -38,7 +39,7 @@ import Icons from "assets/icons";
     
     render() {
         return (
-         <View style={{ 
+         <KeyboardAwareScrollView enableOnAndroid = {true} resetScrollToCoords = {{x:0, y:0}} contentContainerStyle={{ 
           flex: 1,
           alignItems:'center',
           justifyContent:'center'
@@ -47,7 +48,7 @@ import Icons from "assets/icons";
           />
              <Text
              style={styles.buttonText}>
-               {'Liczba kości'}
+               {'\nLiczba kości:'}
              </Text>
             <TextInput 
                 style={styles.textInput}
@@ -59,7 +60,7 @@ import Icons from "assets/icons";
             />
             <Text
             style={styles.buttonText}>
-                {'*\nLiczba ścianek na kości'}
+                {'Liczba ścianek na kości:'}
             </Text>
             <TextInput
                 style={styles.textInput} 
@@ -77,14 +78,14 @@ import Icons from "assets/icons";
                 multiplierValue: this.state.multiplier,
               });
              }}
-             title='Losuj!'
-             color='#841584'>
-              <View 
-              style={!this.state.dice || !this.state.multiplier || this.state.dice == 0 ? styles.buttonDis : styles.button}>
-                <Text style={styles.buttonText}>Losuj!</Text>
-              </View>
+             title='Losuj!'>
+              <ImageBackground source={!this.state.dice || !this.state.multiplier || this.state.dice == 0 ? Icons.buttonIcons.buttonDark : Icons.buttonIcons.buttonLight} style={{width: 143, height: 40}}>
+                <View style={styles.button}>
+                  <Text style={styles.buttonText}>Losuj!</Text>
+                </View>
+              </ImageBackground>
             </TouchableOpacity>
-         </View> 
+         </KeyboardAwareScrollView> 
        );
        } //dodać shake'a i ograniczyć znowu tak jak buttona
 
@@ -131,10 +132,7 @@ import Icons from "assets/icons";
         marginBottom: 10,
         width: 140,
         height: 40,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 1
+        alignItems: 'center'
     },
     buttonDis: {
       marginBottom: 10,

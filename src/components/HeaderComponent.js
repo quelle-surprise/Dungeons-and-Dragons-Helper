@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import * as firebase from 'firebase';
 import Icons from "assets/icons";
 
@@ -23,9 +23,11 @@ export default class HeaderComponent extends React.Component {
 
       <View style={styles.navbar}>
           <TouchableOpacity style={styles.alignLeft} onPress={() => this.signOutUser()}>
+            <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 143, height: 40}}>
               <View style={styles.button}>
-                  <Text style={styles.buttonText}>Wyloguj</Text>
+                <Text style={styles.buttonText}>Wyloguj</Text>
               </View>
+            </ImageBackground>
           </TouchableOpacity>
 
           <Text style={styles.text}>
@@ -58,23 +60,18 @@ const styles = StyleSheet.create({
   },
   alignLeft: {
     flex: 1,
-    marginTop: 15,
-    flexDirection: 'column',
+    marginTop: 15
   },
   button: {
     width: 140,
     height: 35,
-    borderRadius:10,
-    borderWidth: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 1
+    alignItems: 'center'
 },
 buttonText: {
     fontFamily: 'Toms Handwritten',
     fontSize: 24,
     padding: 5,
     color: 'black',
+    alignItems: 'center'
 },
 });
