@@ -17,6 +17,8 @@ import Icons from "assets/icons";
 import {Image} from "react-native";
 import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
+import MonsterScreen from "../screens/monsters/MonsterScreen";
+import SpellScreen from "../screens/spells/SpellScreen";
 
 const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
@@ -107,6 +109,8 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
 const DashboardStackNavigator = createStackNavigator({
     DashboardTabNavigator: DashboardTabNavigator,
     FeatureScreen: {screen: FeatureScreen},
+    MonsterScreen: {screen: MonsterScreen},
+    SpellScreen: {screen: SpellScreen},
     HeaderComponent: {screen: HeaderComponent},
     SettingsScreen: {screen: SettingsScreen},
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},

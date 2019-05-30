@@ -2,13 +2,13 @@ import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View, ScrollView} from 'react-native';
 
 
-export default class FeatureScreen extends React.Component {
+export default class SpellScreen extends React.Component {
     constructor() {
         super();
         this.state = {
             data: [],
             loaded: true,
-            error: null
+            error: null,
         }
     }
 
@@ -48,10 +48,24 @@ export default class FeatureScreen extends React.Component {
             )
         }
 
-        var className = '';
-        if(typeof this.state.data.class !== 'undefined')
+        var comps = '';
+        if(typeof this.state.data.components !== 'undefined')
+        this.state.data.components.forEach(element => {
+            comps += element + ' ';
+        });
+
+        var schoolName = '';
+        if(typeof this.state.data.school !== 'undefined')
         {
-            className = this.state.data.class.name;
+            schoolName = this.state.data.school.name;
+        }
+        
+        var classes = '';
+        if(typeof this.state.data.classes !== 'undefined')
+        {
+            this.state.data.classes.forEach(element => {
+                classes += element.name + ' ';
+            })
         }
 
         return (
@@ -60,13 +74,29 @@ export default class FeatureScreen extends React.Component {
                     Nazwa: {this.state.data.name}
                 </Text>
                 <Text style={styles.smallText}>
-                    Poziom: {this.state.data.level} {"\n"}
-                    Klasa: {className} {"\n"}
+                    Zasięg: {this.state.data.range} {"\n"}
+                    Komponenty: {comps}{"\n"}
+                    Materiały: {this.state.data.material} {"\n"}
+                    Rytuał: {this.state.data.ritual} {"\n"}
+                    Koncentracja: {this.state.data.concentration}, Czas rzucania: {this.state.data.casting_time} {"\n"}
+                    Poziom: {this.state.data.level}, Szkoła: {schoolName} {"\n"}
                 </Text>
+
                 <Text>
                     <Text style={styles.mediumBoldText}>Opis: </Text>
                     <Text style={styles.smallText}>{this.state.data.desc}</Text>
                 </Text>
+
+                <Text>
+                    <Text style={styles.mediumBoldText}>Klasy: </Text>
+                    <Text style={styles.smallText}>{classes}</Text>
+                </Text>
+
+
+ 
+
+
+
             </ScrollView>
         )
 
