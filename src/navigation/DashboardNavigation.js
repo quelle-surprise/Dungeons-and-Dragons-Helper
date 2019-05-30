@@ -6,12 +6,13 @@ import {
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import FeaturesScreen from "../screens/features/FeaturesScreen";
 import FeatureScreen from "../screens/features/FeatureScreen";
-import CharacterScreen from '../screens/CharacterScreen';
+import CharacterScreen from '../screens/character/CharacterScreen';
 import MonstersScreen from "../screens/monsters/MonstersScreen";
 import RollDiceScreen from "../screens/diceRoll/DiceRollScreen";
 import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
-import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
-import ShareCharacterScreen from "../screens/ShareCharacterScreen";
+import CharacterDisplayScreen from "../screens/character/CharacterDisplayScreen";
+import CharacterAddScreen from "../screens/character/CharacterAddScreen";
+import ShareCharacterScreen from "../screens/character/ShareCharacterScreen";
 import SpellsScreen from "../screens/spells/SpellsScreen";
 import Icons from "assets/icons";
 import {Image} from "react-native";
@@ -19,7 +20,6 @@ import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 import MonsterScreen from "../screens/monsters/MonsterScreen";
 import SpellScreen from "../screens/spells/SpellScreen";
-
 const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
             screen: CharacterScreen,
@@ -115,6 +115,7 @@ const DashboardStackNavigator = createStackNavigator({
     SettingsScreen: {screen: SettingsScreen},
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},
     ShareCharacterScreen: {screen: ShareCharacterScreen},
+    CharacterAddScreen: {screen: CharacterAddScreen},
     DiceRollResultScreen: {screen: DiceRollResultScreen}
 });
 const DashboardContainer = createAppContainer(DashboardStackNavigator);
