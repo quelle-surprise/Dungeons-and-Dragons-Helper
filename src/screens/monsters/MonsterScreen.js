@@ -16,11 +16,11 @@ export default class MonsterScreen extends React.Component {
         }
     }
     
-    // async componentDidMount() {
-    //     await Font.loadAsync({
-    //         'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
-    //     });
-    // }
+    async componentDidMount() {
+        await Font.loadAsync({
+            'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
+        });
+    }
 
     getData = () => {
         const {navigation} = this.props;
@@ -58,7 +58,7 @@ export default class MonsterScreen extends React.Component {
         this.state.tableData[4] = this.state.data.wisdom;
         this.state.tableData[5] = this.state.data.charisma;
         return (
-            <ScrollView>
+            <ScrollView style={styles.view}>
                 <Text style={styles.largeText}>
                     Nazwa: {this.state.data.name} {"\n"}
                 </Text>
@@ -78,7 +78,7 @@ export default class MonsterScreen extends React.Component {
                     data={this.state.data.actions}
                     renderItem={({item}) => 
                     <ListItem 
-                        textStyle={styles.smallText}
+                        subtitleStyle={styles.smallText}
                         titleStyle={styles.mediumText}
                         title={item.name} 
                         subtitle={item.desc}/>}
@@ -88,7 +88,7 @@ export default class MonsterScreen extends React.Component {
                     data={this.state.data.special_abilities}
                     renderItem={({item}) => 
                     <ListItem
-                        textStyle={styles.smallText}
+                        subtitleStyle={styles.smallText}
                         titleStyle={styles.mediumText}
                         title={item.name} 
                         subtitle={item.desc}/>}
@@ -98,7 +98,7 @@ export default class MonsterScreen extends React.Component {
                     data={this.state.data.legendary_actions}
                     renderItem={({item}) => 
                     <ListItem 
-                        textStyle={styles.smallText}
+                        subtitleStyle={styles.smallText}
                         titleStyle={styles.mediumText}
                         title={item.name} 
                         subtitle={item.desc}/>}
@@ -116,6 +116,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    view: {
+        padding: 5,
+    },
     largeText: {
         fontFamily: 'Toms Handwritten',
         fontSize: 30,
@@ -126,14 +129,14 @@ const styles = StyleSheet.create({
     mediumText: {
         fontFamily: 'Toms Handwritten',
         fontSize: 24,
-        padding: 3,
+        padding: 5,
         color: 'black',
         textAlign: 'left'
     },
     smallText:{
         fontFamily: 'Toms Handwritten',
         fontSize: 20,
-        padding: 2,
+        padding: 5,
         color: 'black',
         textAlign: 'left'
     }, 
