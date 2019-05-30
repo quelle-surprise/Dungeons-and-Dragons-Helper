@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Alert, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, TextInput, Alert, Text, TouchableOpacity, ActivityIndicator, ImageBackground} from 'react-native';
 import {CheckBox} from 'react-native-elements'
 
 import * as firebase from 'firebase';
 import {Font} from "expo";
 import LoadingScreen from "../LoadingScreen";
+import Icons from "assets/icons";
 
 export default class RegisterScreen extends React.Component {
 
@@ -85,14 +86,19 @@ export default class RegisterScreen extends React.Component {
                     />
                     <View style={{paddingTop: 20}}/>
                     <TouchableOpacity onPress={this.onRegisterPress}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>Utwórz konto</Text>
-                        </View>
+                        <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 140, height: 40}}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>Utwórz konto</Text>
+                            </View>
+                        </ImageBackground>
                     </TouchableOpacity>
+                    <View style={{paddingTop: 10}}/>
                     <TouchableOpacity onPress={this.onBackToLoginPress}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>Powrót</Text>
-                        </View>
+                        <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 140, height: 40}}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>Powrót</Text>
+                            </View>
+                        </ImageBackground>
                     </TouchableOpacity>
                 </View>
             );
@@ -114,12 +120,8 @@ const styles = StyleSheet.create({
     },
     button: {
         marginBottom: 10,
-        width: 140,
-        height: 40,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 1
+        width: 150,
+        alignItems: 'center'
     },
     buttonText: {
         fontFamily: 'Toms Handwritten',

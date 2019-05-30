@@ -7,7 +7,8 @@ import {
     Alert,
     Image,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    ImageBackground
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Facebook} from 'expo';
@@ -86,18 +87,22 @@ export default class LoginScreen extends React.Component {
                     />
                     <View style={{paddingTop: 0}}/>
                     <TouchableOpacity onPress={this.loginUser}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>Zaloguj się</Text>
-                        </View>
+                        <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 143, height: 40}}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>Zaloguj się</Text>
+                            </View>
+                        </ImageBackground>
                     </TouchableOpacity>
                     <Text style={styles.hyperlink} onPress={() => this.props.navigation.navigate('ForgotPassword')}>Zresetuj
                         hasło</Text>
                     <View style={{paddingTop: 20}}/>
                     <Text style = {styles.text}> Nie masz konta?</Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>Zarejestruj się</Text>
-                        </View>
+                        <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 143, height: 40}}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>Zarejestruj się</Text>
+                            </View>
+                        </ImageBackground>
                     </TouchableOpacity>
                     <View style={styles.container}>
                         <SocialIcon
@@ -131,10 +136,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width: 140,
         height: 35,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 1
+        alignItems: 'center'
     },
     buttonFb: {
         marginBottom: 20,
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
     },
     hyperlink: {
         fontFamily: 'Toms Handwritten',
-        color: '#141fe9',
+        color: '#626262',
         textDecorationLine: 'underline',
         fontSize: 24
     },
