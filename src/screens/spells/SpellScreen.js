@@ -1,6 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ActivityIndicator, StyleSheet, Text, View, ScrollView} from 'react-native';
 
 
 export default class SpellScreen extends React.Component {

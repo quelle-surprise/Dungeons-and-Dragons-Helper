@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View, ScrollView} from 'react-native';
 
 
 export default class FeatureScreen extends React.Component {
@@ -36,17 +36,17 @@ export default class FeatureScreen extends React.Component {
     render() {
         if (this.state.loading) {
             return (
-                <View style={styles.loader}>
+                <View style={styles.container}>
                     <ActivityIndicator size="large" color="#0c9"/>
                 </View>
             )
         }
         return (
-            <View>
+            <ScrollView style={styles.view}>
                 <Text>{this.state.data.name}</Text>
                 <Text>{this.state.data.level}</Text>
 
-            </View>
+            </ScrollView>
         )
 
     }
@@ -55,17 +55,45 @@ export default class FeatureScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
-    txt: {
-        fontSize: 24,
-        color: '#333'
+    view: {
+        padding: 5,
     },
-    err: {
-        color: 'red',
+    largeText: {
+        fontFamily: 'Toms Handwritten',
         fontSize: 30,
-        fontWeight: 'bold'
-    }
-});
+        padding: 5,
+        color: 'black',
+        textAlign: 'left'
+    },
+    mediumText: {
+        fontFamily: 'Toms Handwritten',
+        fontSize: 24,
+        padding: 5,
+        color: 'black',
+        textAlign: 'left'
+    },
+    mediumBoldText: {
+        fontFamily: 'Toms Handwritten',
+        fontSize: 25,
+        fontWeight: '400',
+        padding: 5,
+        color: 'black',
+        textAlign: 'left'
+    },
+    smallText:{
+        fontFamily: 'Toms Handwritten',
+        fontSize: 20,
+        padding: 5,
+        color: 'black',
+        textAlign: 'left'
+    }, 
+    head: { height: 40, backgroundColor: '#f1f8ff' },
+    details: {
+        fontFamily: 'Toms Handwritten',
+        fontSize: 25,
+        textAlign: 'center',
+      }
+  });
