@@ -41,11 +41,26 @@ export default class FeatureScreen extends React.Component {
                 </View>
             )
         }
+
+        var className = '';
+        if(typeof this.state.data.class !== 'undefined')
+        {
+            className = this.state.data.class.name;
+        }
+
         return (
             <ScrollView style={styles.view}>
-                <Text>{this.state.data.name}</Text>
-                <Text>{this.state.data.level}</Text>
-
+                <Text style={styles.largeText}>
+                    Nazwa: {this.state.data.name}
+                </Text>
+                <Text style={styles.smallText}>
+                    Poziom: {this.state.data.level} {"\n"}
+                    Klasa: {className} {"\n"}
+                </Text>
+                <Text>
+                    <Text style={styles.mediumBoldText}>Opis: </Text>
+                    <Text style={styles.smallText}>{this.state.data.desc}</Text>
+                </Text>
             </ScrollView>
         )
 
