@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     createAppContainer,
-    createBottomTabNavigator,
     createStackNavigator
 } from 'react-navigation';
 import { createMaterialTopTabNavigator } from 'react-navigation'
@@ -12,6 +11,7 @@ import MonstersScreen from "../screens/monsters/MonstersScreen";
 import RollDiceScreen from "../screens/diceRoll/DiceRollScreen";
 import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
 import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
+import ShareCharacterScreen from "../screens/ShareCharacterScreen";
 import SpellsScreen from "../screens/spells/SpellsScreen";
 import Icons from "assets/icons";
 import {Image} from "react-native";
@@ -114,6 +114,7 @@ const DashboardStackNavigator = createStackNavigator({
     HeaderComponent: {screen: HeaderComponent},
     SettingsScreen: {screen: SettingsScreen},
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},
+    ShareCharacterScreen: {screen: ShareCharacterScreen},
     DiceRollResultScreen: {screen: DiceRollResultScreen}
 });
 const DashboardContainer = createAppContainer(DashboardStackNavigator);
