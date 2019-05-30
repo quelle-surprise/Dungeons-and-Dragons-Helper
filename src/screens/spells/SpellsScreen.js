@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import {View, Text, FlatList, ActivityIndicator, StyleSheet} from "react-native";
 import {ListItem, SearchBar } from "react-native-elements";
 import { List } from "native-base";
+import {Font} from "expo";
 
 
-class SpellsScreen extends PureComponent {
+export default class SpellsScreen extends PureComponent {
+
     constructor(props) {
         super(props);
 
@@ -12,15 +14,21 @@ class SpellsScreen extends PureComponent {
             loading: false,
             data: [],
             error: null,
-            refreshing: false
+            refreshing: false,
+            fontLoaded: false
         };
+        this.arrayholder = [];
     }
 
-    componentDidMount() {
-        this.makeRemoteRequest();
+    async componentDidMount() {
+        this.fetchData();
+        await Font.loadAsync({
+            'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
+        });
+        this.setState({fontLoaded: true});
     }
 
-    makeRemoteRequest = () => {
+    fetchData = () => {
 
         const url = `http://www.dnd5eapi.co/api/spells/`;
 
@@ -35,6 +43,7 @@ class SpellsScreen extends PureComponent {
                     loading: false,
                     refreshing: false
                 });
+                this.arrayholder = res.results;
             })
             .catch(error => {
                 this.setState({ error, loading: false });
@@ -45,7 +54,7 @@ class SpellsScreen extends PureComponent {
         return (
             <View
                 style={{
-                    height: 1,
+                    height: 0.5,
                     backgroundColor: "black",
                 }}
             />
@@ -53,7 +62,25 @@ class SpellsScreen extends PureComponent {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round />;
+        return <SearchBar
+            placeholder="Wprowadź nazwę zaklęcia"
+            lightTheme
+            inputStyle={styles.textInput}
+            onChangeText={text => this.searchFilterFunction(text)}
+            value={this.state.value}
+        />;
+    };
+
+    searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.name.toUpperCase()}`;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({data: newData});
     };
 
     renderFooter = () => {
@@ -80,17 +107,28 @@ class SpellsScreen extends PureComponent {
                     renderItem={({ item }) => (
                         <ListItem
                             title={`${item.name}`}
-                            subtitle={item.url}
                             iconRight
+                            titleStyle={styles.textInput}
+                            onPress = {() => this.props.navigation.navigate('SpellScreen', {
+                                url: item.url
+                            })
+                            }
                         />
                     )}
                     keyExtractor={item => item.url}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
+                    ListFooterComponent={this.renderFooter}
                 />
             </List>
         );
     }
 }
 
-export default SpellsScreen;
+const styles = StyleSheet.create({
+    textInput: {
+        fontFamily: 'Toms Handwritten',
+        color: 'black',
+        fontSize: 30,
+    },
+});
