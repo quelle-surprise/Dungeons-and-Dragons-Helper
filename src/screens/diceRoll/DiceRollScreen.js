@@ -24,7 +24,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
     componentWillMount() {
       RNShake.addEventListener('ShakeEvent', () => {
-      if(this.state.dice || !this.state.multiplier || this.state.dice == 0){
+      if(!this.state.dice || !this.state.multiplier || this.state.dice == 0){
       }
       else{
         () => {
@@ -98,7 +98,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
                 newText = newText + text[i];
             }
             else {
-                alert('Proszę wpisywać tylko liczby od 1 do 9!');
+                alert('Proszę wpisywać tylko liczby większe od zera!');
             }
         }
         this.setState({ multiplier: newText });
@@ -113,7 +113,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
                 newText = newText + text[i];
             }
             else {
-                alert('Proszę wpisywać tylko liczby!');
+                alert('Proszę wpisywać tylko liczby więkze od zera!');
             }
         }
         this.setState({ dice: newText });
