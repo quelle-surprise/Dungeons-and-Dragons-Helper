@@ -22,7 +22,7 @@ export default class CharacterDisplayScreen extends React.Component {
             editModeEnabled: false,
             tableHead: ['Sił', 'Zre', 'Kon', 'Int', 'Mdr', 'Cha'],
             additionalSkillsNames: [
-                "Akrobatyka", "Atletyka","Arkana", "Empatia","Historia","Medycyna", "Natura","Opieka nad zwierzętami","Oszustwo",
+                "Akrobatyka", "Arkana","Atletyka", "Empatia","Historia","Medycyna", "Natura","Opieka nad zwierzętami","Oszustwo",
                 "Perswazja", "Religia","Skradanie","Spostrzegawczość","Sztuka przetrwania","Śledztwo","Występy","Zastraszanie","Zwinne palce"],
             additionalSkillsStat: [
                 "Zre", "Int","Sił", "Mdr","Int","Mdr", "Int","Mdr","Cha",
@@ -43,6 +43,12 @@ export default class CharacterDisplayScreen extends React.Component {
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
+        });
+    }
+
+    
+    editCharacterevent = () => {
+        this.props.navigation.navigate('CharacterAddScreen', {
         });
     }
 
@@ -80,7 +86,7 @@ export default class CharacterDisplayScreen extends React.Component {
     }
 
     chekProficiency = (addProficiency, statvalue, proficiency, statname) => {
-        if(addProficiency == 1) {
+        if(addProficiency == true) {
             return ((statvalue + proficiency) + " " + statname)
         }
         else
@@ -117,64 +123,10 @@ export default class CharacterDisplayScreen extends React.Component {
         return (
             <Container style={styles.container}>
 
-                {this.state.editModeEnabled === true &&
-                <View>
-                    <View style={{ flexDirection:'row', width: Math.round(Dimensions.get('window').width) }}>
-                        <TextInput
-                            label='Imię postaci'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                        <TextInput
-                            label='Klasa'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                    </View>
-                    <View style={{ flexDirection:'row' }}>
-                        <TextInput
-                            label='Poziom'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                        <TextInput
-                            label='charakter'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                        
-                    </View>
-                    <View style={{ flexDirection:'row' }}>
-                        <TextInput
-                            label='rasa'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                        <TextInput
-                            label='pochodzenie'
-                            type="outlined"
-                            style={{flex: 0.5}}
-                            value={this.state.characterClass}
-                            onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                        />
-                    </View>
-                    </View>
-                }
-                {this.state.editModeEnabled === false &&
                             <View style={{height: 100}}>
                             <Text
-                                style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
-                            <Text style={styles.name}> Poziom {this.state.character.level}</Text>
+                                style={styles.name}> {this.state.character.imię}, {this.state.character.klasa}  </Text>
+                            <Text style={styles.name}> Poziom {this.state.character.poziom}</Text>
                             <Fab
                                 containerStyle={{}}
                                 style={styles.fab}
@@ -183,9 +135,7 @@ export default class CharacterDisplayScreen extends React.Component {
                                 <View><Image source={Icons.charScreenIcons.share}/></View>
                             </Fab>
                         </View>
-                }
                 
-
                 <Segment style={styles.segment}>
                     <Button
                         mode="outlined"
@@ -213,58 +163,6 @@ export default class CharacterDisplayScreen extends React.Component {
                     </Button>
                 </Segment>
 
-                {this.state.editModeEnabled === true &&
-                    <View>
-                        {this.state.seg === 1 &&
-                        <View style={{ flexDirection:'row' }}>
-                            <TextInput
-                                label='Sił'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                            <TextInput
-                                label='Zre'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                            <TextInput
-                                label='Kon'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                            <TextInput
-                                label='Int'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                            <TextInput
-                                label='Mdr'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                            <TextInput
-                                label='Cha'
-                                type="outlined"
-                                style={styles.tableInput}
-                                value={this.state.characterClass}
-                                onChangeText={characterClass => this.setState({characterClass: characterClass})}
-                            />
-                        </View>
-                        }
-                    </View>
-                }
-
-                {this.state.editModeEnabled === false &&
                     <View>
                         {this.state.seg === 1 &&
                         <View>
@@ -320,29 +218,18 @@ export default class CharacterDisplayScreen extends React.Component {
                         />
                         }
                     </View>
-                }
-
-            {this.state.editModeEnabled === false &&
-                <Fab
-                    containerStyle={{}}
-                    position="bottomRight"
-                    style={{ backgroundColor: "#5067FF" }}
-                    onPress={() => this.setState({editModeEnabled: true})}
-                >
-                    <View><Image source={Icons.charScreenIcons.share}/></View>
-                </Fab>
-             }
-             {this.state.editModeEnabled === true &&
-                <Fab
-                    containerStyle={{}}
-                    position="bottomRight"
-                    style={{ backgroundColor: "#5067FF" }}
-                    onPress={() => this.setState({editModeEnabled: false})}
-                >
-                    <View><Image source={Icons.charScreenIcons.share}/></View>
-                </Fab>
-             }
                 
+                <Fab
+                    containerStyle={{}}
+                    position="bottomRight"
+                    style={{ backgroundColor: "#5067FF" }}
+                    onPress={() => {
+                        this.setState({editModeEnabled: true})
+                        this.editCharacterevent()
+                    }}
+                >
+                    <View><Image source={Icons.charScreenIcons.share}/></View>
+                </Fab>
             </Container>
 
         )

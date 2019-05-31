@@ -105,9 +105,9 @@ export default class CharacterScreen extends React.Component {
                                             style={{width: 50, height: 50}}
                                             source={Icons.charScreenIcons.characterIcon}
                                         />
-                                        <Text style={styles.details}> {data.val().name},</Text>
+                                        <Text style={styles.details}> {data.val().imię},</Text>
                                         <Text
-                                            style={styles.details}> {data.val().characterClass} poziomu {data.val().level}</Text>
+                                            style={styles.details}> {data.val().klasa} poziomu {data.val().poziom}</Text>
                                     </View>
                                 </ListItem>
                             }
