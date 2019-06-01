@@ -107,7 +107,7 @@ export default class CharacterDisplayScreen extends React.Component {
     generateProficiencyTable = (modifiers) => {
         let proficiency = [];
         modifiers.forEach(modifier => {
-            proficiency.push(modifier + this.state.character.proficiency)
+            proficiency.push(Number(modifier) + Number(this.state.character.proficiency))
         });
         this.state.proficiencyTableData.push(proficiency)
     };
