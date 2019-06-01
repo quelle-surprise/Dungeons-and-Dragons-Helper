@@ -45,7 +45,7 @@ export default class CharacterScreen extends React.Component {
 
 
     async deleteRow(secId, rowId, rowMap, data) {
-        await firebase.database().ref('characters/' + data.key).set(null);
+        await firebase.database().ref(this.state.userId + '/characters/' + data.key).set(null);
         rowMap[`${secId}${rowId}`].props.closeRow();
         var newData = [...this.state.listViewData];
         newData.splice(rowId, 1);
@@ -112,7 +112,6 @@ export default class CharacterScreen extends React.Component {
                                     onPress={() => this.characterClickEvent(data.val(), data.key)}
                                     onLongPress={() => this.characterLongPress(secId, rowId, rowMap, data)}
                                 >
-
                                     <View style={styles.flatview}>
                                         <Image
                                             style={{width: 50, height: 50}}
