@@ -11,10 +11,11 @@ export default class CharacterDisplayScreen extends React.Component {
             "Perswazja", "Religia", "Skradanie", "Spostrzegawczość", "Sztuka przetrwania", "Śledztwo", "Występy", "Zastraszanie", "Zwinne palce"],
         name: "", characterClass: "", level: "", char: "", characterRace: "", provenance: "", proficiency: "",
         strength: "", dexterity: "", condition: "", intelligence: "", wisdom: "", charisma: "",
-        additionalSkill: [false]
+        additionalSkill: [false], type: 0
     };
     character = [];
     userId = "";
+    charId = "";
 
     constructor(props) {
         super(props);
@@ -22,6 +23,8 @@ export default class CharacterDisplayScreen extends React.Component {
         const {navigation} = this.props;
         this.character = navigation.getParam('character', [""]);
         this.userId = navigation.getParam('userId', "");
+        this.type = navigation.getParam('type', 0);
+        this.charId = navigation.getParam('charId', "");
 
         console.log("Got user: " + this.userId)
         if (this.character.name !== "") {
@@ -46,37 +49,72 @@ export default class CharacterDisplayScreen extends React.Component {
     };
 
 
-    createNewCharacter = () => {
-        let c = this.state;
-        if (c.name && c.characterClass && c.level && c.char && c.characterRace && c.provenance &&
+    saveCharacter = () => {
+        if(this.type == 1){
+            let c = this.state;
+            if (c.name && c.characterClass && c.level && c.char && c.characterRace && c.provenance &&
             c.proficiency && c.strength && c.dexterity && c.condition && c.intelligence && c.wisdom && c.charisma) {
-            console.log("pushing char to user: " + this.userId)
-            firebase.database().ref(this.userId + '/characters/').push({
-                additionalSkillsNames: this.state.additionalSkillsNames,
-                name: this.state.name,
-                characterClass: this.state.characterClass,
-                level: this.state.level,
-                char: this.state.char,
-                characterRace: this.state.characterRace,
-                provenance: this.state.provenance,
-                proficiency: this.state.proficiency,
-                strength: this.state.strength,
-                dexterity: this.state.dexterity,
-                condition: this.state.condition,
-                intelligence: this.state.intelligence,
-                wisdom: this.state.wisdom,
-                charisma: this.state.charisma,
-                additionalSkill: this.state.additionalSkill
-            }).then(() => {
-                console.log('successfully added to database')
-            }).catch(() => {
-                console.log('there were some problems during insetrion ')
-            });
-            this.props.navigation.goBack();
-            Alert.alert("Pomyślnie dodano postać")
-        } else {
+                console.log("pushing char to user: " + this.userId)
+                firebase.database().ref(this.userId + '/characters/').push({
+                    additionalSkillsNames: this.state.additionalSkillsNames,
+                    name: this.state.name,
+                    characterClass: this.state.characterClass,
+                    level: this.state.level,
+                    char: this.state.char,
+                    characterRace: this.state.characterRace,
+                    provenance: this.state.provenance,
+                    proficiency: this.state.proficiency,
+                    strength: this.state.strength,
+                    dexterity: this.state.dexterity,
+                    condition: this.state.condition,
+                    intelligence: this.state.intelligence,
+                    wisdom: this.state.wisdom,
+                    charisma: this.state.charisma,
+                    additionalSkill: this.state.additionalSkill,
+                    spells: [" "],
+                    skills: [" "]
+                }).then(() => {
+                    console.log('successfully added to database')
+                }).catch(() => {
+                    console.log('there were some problems during insetrion ')
+                });
+                this.props.navigation.goBack();
+                Alert.alert("Pomyślnie dodano postać")
+            } else {
+                Alert.alert("Proszę wypełnić formularz")
+            }
+    }
+    else{
+        let c = this.state;
+            if (c.name && c.characterClass && c.level && c.char && c.characterRace && c.provenance &&
+            c.proficiency && c.strength && c.dexterity && c.condition && c.intelligence && c.wisdom && c.charisma) {
+        firebase.database().ref(this.userId + '/characters/' + this.charId + "/").update({
+            name: this.state.name,
+            characterClass: this.state.characterClass,
+            level: this.state.level,
+            char: this.state.char,
+            characterRace: this.state.characterRace,
+            provenance: this.state.provenance,
+            proficiency: this.state.proficiency,
+            strength: this.state.strength,
+            dexterity: this.state.dexterity,
+            condition: this.state.condition,
+            intelligence: this.state.intelligence,
+            wisdom: this.state.wisdom,
+            charisma: this.state.charisma,
+            additionalSkill: this.state.additionalSkill,
+        }).then(() => {
+            console.log('successfully upadted to database')
+        }).catch(() => {
+            console.log('there were some problems during insetrion ')
+        });
+        this.props.navigation.goBack();
+        Alert.alert("Zaktualizowano postać");
+    }
+    else {
             Alert.alert("Proszę wypełnić formularz")
         }
+    }
     };
 
     generateList = () => {
@@ -120,7 +158,7 @@ export default class CharacterDisplayScreen extends React.Component {
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         {this.generateTextInput("Poziom", this.state.level, level => this.setState({level: level}), {flex: 0.5}, 'numeric')}
-                        {this.generateTextInput("Klasa", this.state.char, char => this.setState({char: char}), {flex: 0.5})}
+                        {this.generateTextInput("Charakter", this.state.char, char => this.setState({char: char}), {flex: 0.5})}
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         {this.generateTextInput("Rasa", this.state.characterRace, characterRace => this.setState({characterRace: characterRace}), {flex: 0.5})}
@@ -144,7 +182,7 @@ export default class CharacterDisplayScreen extends React.Component {
                     mode="outlined"
                     color="black"
                     style={styles.button}
-                    onPress={() => this.createNewCharacter()}
+                    onPress={() => this.saveCharacter()}
                 >
                     <Text>Dodaj</Text>
                 </Button>
