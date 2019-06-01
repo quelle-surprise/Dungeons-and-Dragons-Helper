@@ -6,10 +6,13 @@ export default class ShareCharacterScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            characterId: ""
+            characterId: "",
+            userId: ""
         };
         const {navigation} = this.props;
         this.state.characterId = navigation.getParam('characterId', [""]);
+        this.state.userId = navigation.getParam('userId', [""]);
+        console.log("Share id: " + this.state.characterId + "," + this.state.userId)
     }
 
     render() {
@@ -19,7 +22,7 @@ export default class ShareCharacterScreen extends React.Component {
                 <Text style={styles.smallerText}>{this.state.characterId}</Text>
                 <View>
                     <QRCode
-                        value={this.state.characterId}
+                        value={this.state.characterId + "," + this.state.userId}
                         size={300}
                         bgColor='black'
                         fgColor='white'/>

@@ -1,9 +1,9 @@
+import Icons from "assets/icons";
+import {Container, Fab, ListItem, Segment, View} from 'native-base';
 import React from "react";
 import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
-import {Container, Fab, ListItem, Segment, View} from 'native-base'
-import {Row, Rows, Table} from 'react-native-table-component';
 import {Button} from 'react-native-paper';
-import Icons from "assets/icons";
+import {Row, Rows, Table} from 'react-native-table-component';
 
 export default class CharacterDisplayScreen extends React.Component {
     constructor(props) {
@@ -23,11 +23,13 @@ export default class CharacterDisplayScreen extends React.Component {
                 "charisma", "intelligence", "dexterity", "wisdom", "wisdom", "intelligence", "charisma", "charisma", "dexterity"],
             additionalSkillsWithValues: [],
             statisticsTableData: [],
-            proficiencyTableData: []
+            proficiencyTableData: [],
+            userId: ""
         };
         const {navigation} = this.props;
         this.state.character = navigation.getParam('character', [""]);
         this.state.characterId = navigation.getParam('characterId', "");
+        this.state.userId = navigation.getParam('userId', "");
 
         this.generateStatisticsTable();
         this.generateAdditionalSkillsList(this.state.additionalSkillsStat,
@@ -37,12 +39,15 @@ export default class CharacterDisplayScreen extends React.Component {
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
+            userId: this.state.userId
         });
     };
 
-
     editCharacterevent = () => {
-        this.props.navigation.navigate('CharacterAddScreen', {});
+        this.props.navigation.navigate('CharacterAddScreen', {
+            character: this.state.character,
+            userId: this.state.userId
+        });
     };
 
     generateAdditionalSkillsList = (statistics, proficiency, names) => {
@@ -106,7 +111,7 @@ export default class CharacterDisplayScreen extends React.Component {
     generateProficiencyTable = (modifiers) => {
         let proficiency = [];
         modifiers.forEach(modifier => {
-            proficiency.push(modifier + this.state.character.proficiency)
+            proficiency.push(Number(modifier) + Number(this.state.character.proficiency))
         });
         this.state.proficiencyTableData.push(proficiency)
     };
