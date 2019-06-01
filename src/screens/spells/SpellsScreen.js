@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import {View, Text, FlatList, ActivityIndicator, StyleSheet} from "react-native";
-import {ListItem, SearchBar } from "react-native-elements";
-import { List } from "native-base";
+import React, {PureComponent} from "react";
+import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
+import {ListItem, SearchBar} from "react-native-elements";
+import {List} from "native-base";
 import {Font} from "expo";
 
 
@@ -32,7 +32,7 @@ export default class SpellsScreen extends PureComponent {
 
         const url = `http://www.dnd5eapi.co/api/spells/`;
 
-        this.setState({ loading: true });
+        this.setState({loading: true});
 
         fetch(url)
             .then(res => res.json())
@@ -46,7 +46,7 @@ export default class SpellsScreen extends PureComponent {
                 this.arrayholder = res.results;
             })
             .catch(error => {
-                this.setState({ error, loading: false });
+                this.setState({error, loading: false});
             });
     };
 
@@ -94,22 +94,22 @@ export default class SpellsScreen extends PureComponent {
                     borderColor: "#CED0CE"
                 }}
             >
-                <ActivityIndicator animating size="large" />
+                <ActivityIndicator animating size="large"/>
             </View>
         );
     };
 
     render() {
         return (
-            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+            <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>
                 <FlatList
                     data={this.state.data}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                         <ListItem
                             title={`${item.name}`}
                             iconRight
                             titleStyle={styles.textInput}
-                            onPress = {() => this.props.navigation.navigate('SpellScreen', {
+                            onPress={() => this.props.navigation.navigate('SpellScreen', {
                                 url: item.url
                             })
                             }

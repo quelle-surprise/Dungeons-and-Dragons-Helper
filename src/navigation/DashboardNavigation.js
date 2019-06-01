@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    createAppContainer,
-    createStackNavigator
-} from 'react-navigation';
-import { createMaterialTopTabNavigator } from 'react-navigation'
+import {createAppContainer, createMaterialTopTabNavigator, createStackNavigator} from 'react-navigation';
 import FeaturesScreen from "../screens/features/FeaturesScreen";
 import FeatureScreen from "../screens/features/FeatureScreen";
 import CharacterScreen from '../screens/character/CharacterScreen';
@@ -20,14 +16,15 @@ import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 import MonsterScreen from "../screens/monsters/MonsterScreen";
 import SpellScreen from "../screens/spells/SpellScreen";
+
 const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
             screen: CharacterScreen,
             navigationOptions: {
-                tabBarIcon: ({ tintColor }) => {
-                    return(
+                tabBarIcon: ({tintColor}) => {
+                    return (
                         <Image
-                            source = {Icons.bottomTabNavigatorIcons.chars}
+                            source={Icons.bottomTabNavigatorIcons.chars}
                         />
                     );
                 }
@@ -81,7 +78,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 }
             }
         },
-},
+    },
     {
         tabBarOptions: {
             showLabel: false,
@@ -98,7 +95,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
         },
         tabBarPosition: 'bottom',
         swipeEnabled: true,
-        navigationOptions: ({ navigation }) => {
+        navigationOptions: ({navigation}) => {
             [navigation.state.index];
             return {
                 headerTitle: <HeaderComponent/>
