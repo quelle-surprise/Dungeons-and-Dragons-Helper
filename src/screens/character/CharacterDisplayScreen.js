@@ -224,13 +224,13 @@ export default class CharacterDisplayScreen extends React.Component {
                 <Fab
                     containerStyle={{}}
                     position="bottomRight"
-                    style={{backgroundColor: "#5067FF"}}
+                    style={styles.fabEdit}
                     onPress={() => {
                         this.setState({editModeEnabled: true});
                         this.editCharacterevent()
                     }}
                 >
-                    <View><Image source={Icons.charScreenIcons.share}/></View>
+                    <View><Image source={Icons.charScreenIcons.edit}/></View>
                 </Fab>
             </Container>
 
@@ -244,6 +244,14 @@ const styles = StyleSheet.create({
     },
     fab: {
         backgroundColor: "transparent",
+        elevation: 0,
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0
+    },
+    fabEdit: {
+        backgroundColor: "#bababa",
         elevation: 0,
         position: 'absolute',
         margin: 16,
