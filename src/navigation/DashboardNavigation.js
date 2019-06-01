@@ -86,7 +86,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 tabBarIcon: ({tintColor}) => {
                     return (
                         <Image
-                            source={Icons.bottomTabNavigatorIcons.monsters}
+                            source={Icons.bottomTabNavigatorIcons.qrScan}
                         />
                     );
                 }
