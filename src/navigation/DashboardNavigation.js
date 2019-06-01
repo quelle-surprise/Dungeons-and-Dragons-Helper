@@ -16,6 +16,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import SettingsScreen from "../screens/SettingsScreen";
 import MonsterScreen from "../screens/monsters/MonsterScreen";
 import SpellScreen from "../screens/spells/SpellScreen";
+import BarcodeScannerScreen from "../screens/BarcodeScannerScreen";
 
 const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
@@ -78,6 +79,18 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 }
             }
         },
+        BarcodeScannerScreen: {
+            screen: BarcodeScannerScreen,
+            navigationOptions: {
+                tabBarIcon: ({tintColor}) => {
+                    return (
+                        <Image
+                            source={Icons.bottomTabNavigatorIcons.qrCode}
+                        />
+                    );
+                }
+            }
+        }
     },
     {
         tabBarOptions: {
