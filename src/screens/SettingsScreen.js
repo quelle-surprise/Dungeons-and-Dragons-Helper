@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, TextInput, Button, Alert, Text, View} from 'react-native';
+import {Alert, Button, ScrollView, StyleSheet, TextInput} from 'react-native';
 import * as firebase from 'firebase';
 
 export default class SettingsScreen extends React.Component {

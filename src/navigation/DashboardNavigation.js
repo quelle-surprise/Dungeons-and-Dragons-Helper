@@ -1,17 +1,14 @@
 import React from 'react';
-import {
-    createAppContainer,
-    createStackNavigator
-} from 'react-navigation';
-import { createMaterialTopTabNavigator } from 'react-navigation'
+import {createAppContainer, createMaterialTopTabNavigator, createStackNavigator} from 'react-navigation';
 import FeaturesScreen from "../screens/features/FeaturesScreen";
 import FeatureScreen from "../screens/features/FeatureScreen";
-import CharacterScreen from '../screens/CharacterScreen';
+import CharacterScreen from '../screens/character/CharacterScreen';
 import MonstersScreen from "../screens/monsters/MonstersScreen";
 import RollDiceScreen from "../screens/diceRoll/DiceRollScreen";
 import DiceRollResultScreen from "../screens/diceRoll/DiceRollResultScreen";
-import CharacterDisplayScreen from "../screens/CharacterDisplayScreen";
-import ShareCharacterScreen from "../screens/ShareCharacterScreen";
+import CharacterDisplayScreen from "../screens/character/CharacterDisplayScreen";
+import CharacterAddScreen from "../screens/character/CharacterAddScreen";
+import ShareCharacterScreen from "../screens/character/ShareCharacterScreen";
 import SpellsScreen from "../screens/spells/SpellsScreen";
 import Icons from "assets/icons";
 import {Image} from "react-native";
@@ -24,10 +21,10 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
             screen: CharacterScreen,
             navigationOptions: {
-                tabBarIcon: ({ tintColor }) => {
-                    return(
+                tabBarIcon: ({tintColor}) => {
+                    return (
                         <Image
-                            source = {Icons.bottomTabNavigatorIcons.chars}
+                            source={Icons.bottomTabNavigatorIcons.chars}
                         />
                     );
                 }
@@ -81,7 +78,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 }
             }
         },
-},
+    },
     {
         tabBarOptions: {
             showLabel: false,
@@ -98,7 +95,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
         },
         tabBarPosition: 'bottom',
         swipeEnabled: true,
-        navigationOptions: ({ navigation }) => {
+        navigationOptions: ({navigation}) => {
             [navigation.state.index];
             return {
                 headerTitle: <HeaderComponent/>
@@ -115,6 +112,7 @@ const DashboardStackNavigator = createStackNavigator({
     SettingsScreen: {screen: SettingsScreen},
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},
     ShareCharacterScreen: {screen: ShareCharacterScreen},
+    CharacterAddScreen: {screen: CharacterAddScreen},
     DiceRollResultScreen: {screen: DiceRollResultScreen}
 });
 const DashboardContainer = createAppContainer(DashboardStackNavigator);

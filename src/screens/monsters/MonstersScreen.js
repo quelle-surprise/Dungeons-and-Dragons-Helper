@@ -92,10 +92,11 @@ export default class MonstersScreen extends PureComponent {
                     borderColor: "#CED0CE"
                 }}
             >
-                <ActivityIndicator animating size="large" />
+                <ActivityIndicator animating size="large"/>
             </View>
         );
     };
+
     render() {
         return (
             <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>

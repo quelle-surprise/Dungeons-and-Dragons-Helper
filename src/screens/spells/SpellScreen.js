@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 
 export default class SpellScreen extends React.Component {
@@ -49,20 +49,18 @@ export default class SpellScreen extends React.Component {
         }
 
         var comps = '';
-        if(typeof this.state.data.components !== 'undefined')
-        this.state.data.components.forEach(element => {
-            comps += element + ' ';
-        });
+        if (typeof this.state.data.components !== 'undefined')
+            this.state.data.components.forEach(element => {
+                comps += element + ' ';
+            });
 
         var schoolName = '';
-        if(typeof this.state.data.school !== 'undefined')
-        {
+        if (typeof this.state.data.school !== 'undefined') {
             schoolName = this.state.data.school.name;
         }
-        
+
         var classes = '';
-        if(typeof this.state.data.classes !== 'undefined')
-        {
+        if (typeof this.state.data.classes !== 'undefined') {
             this.state.data.classes.forEach(element => {
                 classes += element.name + ' ';
             })
@@ -91,10 +89,6 @@ export default class SpellScreen extends React.Component {
                     <Text style={styles.mediumBoldText}>Klasy: </Text>
                     <Text style={styles.smallText}>{classes}</Text>
                 </Text>
-
-
- 
-
 
 
             </ScrollView>
@@ -134,17 +128,17 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left'
     },
-    smallText:{
+    smallText: {
         fontFamily: 'Toms Handwritten',
         fontSize: 20,
         padding: 5,
         color: 'black',
         textAlign: 'left'
-    }, 
-    head: { height: 40, backgroundColor: '#f1f8ff' },
+    },
+    head: {height: 40, backgroundColor: '#f1f8ff'},
     details: {
         fontFamily: 'Toms Handwritten',
         fontSize: 25,
         textAlign: 'center',
-      }
-  });
+    }
+});

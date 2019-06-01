@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 
 export default class FeatureScreen extends React.Component {
@@ -49,8 +49,7 @@ export default class FeatureScreen extends React.Component {
         }
 
         var className = '';
-        if(typeof this.state.data.class !== 'undefined')
-        {
+        if (typeof this.state.data.class !== 'undefined') {
             className = this.state.data.class.name;
         }
 
@@ -104,17 +103,17 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left'
     },
-    smallText:{
+    smallText: {
         fontFamily: 'Toms Handwritten',
         fontSize: 20,
         padding: 5,
         color: 'black',
         textAlign: 'left'
-    }, 
-    head: { height: 40, backgroundColor: '#f1f8ff' },
+    },
+    head: {height: 40, backgroundColor: '#f1f8ff'},
     details: {
         fontFamily: 'Toms Handwritten',
         fontSize: 25,
         textAlign: 'center',
-      }
-  });
+    }
+});
