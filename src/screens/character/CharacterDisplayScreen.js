@@ -85,7 +85,7 @@ export default class CharacterDisplayScreen extends React.Component {
 
     chekProficiency = (addProficiency, statvalue, proficiency, statname) => {
         if (addProficiency == true) {
-            return ((statvalue + proficiency) + " " + statname)
+            return ((Number(statvalue) + Number(proficiency)) + " " + statname)
         } else
             return (statvalue + " " + statname)
     };
@@ -177,17 +177,18 @@ export default class CharacterDisplayScreen extends React.Component {
                         </Table>
 
                         <Text> Umiejętności </Text>
-
-                        <FlatList
-                            data={this.state.additionalSkillsWithValues}
-                            renderItem={({item}) =>
-                                <ListItem>
-                                    <View>
-                                        <Text style={styles.details}> {item}</Text>
-                                    </View>
-                                </ListItem>
-                            }
-                        />
+                        <View style={{height: 280}}>
+                            <FlatList
+                                data={this.state.additionalSkillsWithValues}
+                                renderItem={({item}) =>
+                                    <ListItem>
+                                        <View>
+                                            <Text style={styles.details}> {item}</Text>
+                                        </View>
+                                    </ListItem>
+                                }
+                            />
+                        </View>
 
                     </View>
                     }
