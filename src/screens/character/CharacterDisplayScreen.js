@@ -46,7 +46,9 @@ export default class CharacterDisplayScreen extends React.Component {
     editCharacterevent = () => {
         this.props.navigation.navigate('CharacterAddScreen', {
             character: this.state.character,
-            userId: this.state.userId
+            userId: this.state.userId,
+            charId: this.state.characterId,
+            type: 2
         });
     };
 
@@ -121,10 +123,11 @@ export default class CharacterDisplayScreen extends React.Component {
         return (
             <Container style={styles.container}>
 
-                <View style={{height: 100}}>
+                <View style={{height: 150}}>
                     <Text
                         style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
-                    <Text style={styles.name}> Poziom {this.state.character.level}</Text>
+                    <Text style={styles.name}> Poziom: {this.state.character.level}</Text>
+                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.provenance}</Text>
                     <Fab
                         containerStyle={{}}
                         style={styles.fab}
@@ -176,8 +179,8 @@ export default class CharacterDisplayScreen extends React.Component {
                             <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
                         </Table>
 
-                        <Text> Umiejętności </Text>
-                        <View style={{height: 280}}>
+                        <Text style={styles.details}> Umiejętności </Text>
+                        <View style={{height: 240}}>
                             <FlatList
                                 data={this.state.additionalSkillsWithValues}
                                 renderItem={({item}) =>

@@ -69,7 +69,8 @@ export default class CharacterScreen extends React.Component {
 
     addCharacterEvent = () => {
         this.props.navigation.navigate('CharacterAddScreen', {
-            userId: this.state.userId
+            userId: this.state.userId,
+            type: 1,
         })
     };
 
