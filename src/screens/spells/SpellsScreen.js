@@ -1,6 +1,6 @@
-import React, {PureComponent} from "react";
-import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
-import {ListItem, SearchBar} from "react-native-elements";
+import React, { PureComponent } from "react";
+import {View, FlatList, StyleSheet, Alert, ActivityIndicator} from "react-native";
+import {ListItem, SearchBar } from "react-native-elements";
 import {List} from "native-base";
 import {Font} from "expo";
 
@@ -99,6 +99,25 @@ export default class SpellsScreen extends PureComponent {
         );
     };
 
+    spellLongPress = (item) => {
+        Alert.alert(
+            'Co chcesz zrobić z tym zaklęciem?',
+            '',
+            [
+                {text: 'Powrót', onPress: () => console.log('Return')},
+                {text: 'Dodaj zaklęcie do postaci', onPress: () => this.addCharacterEvent(item.name)}
+            ],
+            {cancelable: true}
+        )
+    }
+
+    addCharacterEvent = (name) => {
+        this.props.navigation.navigate('ChooseCharacterScreen', {
+            name: name, 
+            type: 1
+        });
+    }
+
     render() {
         return (
             <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>
@@ -111,8 +130,8 @@ export default class SpellsScreen extends PureComponent {
                             titleStyle={styles.textInput}
                             onPress={() => this.props.navigation.navigate('SpellScreen', {
                                 url: item.url
-                            })
-                            }
+                            })}
+                            onLongPress={() => this.spellLongPress(item)}
                         />
                     )}
                     keyExtractor={item => item.url}
