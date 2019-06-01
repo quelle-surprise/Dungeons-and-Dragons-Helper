@@ -17,6 +17,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import MonsterScreen from "../screens/monsters/MonsterScreen";
 import SpellScreen from "../screens/spells/SpellScreen";
 import BarcodeScannerScreen from "../screens/BarcodeScannerScreen";
+import ChooseCharacterScreen from "../screens/character/ChooseCharacterScreen";
 
 const DashboardTabNavigator = createMaterialTopTabNavigator({
         CharacterScreen: {
@@ -126,7 +127,8 @@ const DashboardStackNavigator = createStackNavigator({
     CharacterDisplayScreen: {screen: CharacterDisplayScreen},
     ShareCharacterScreen: {screen: ShareCharacterScreen},
     CharacterAddScreen: {screen: CharacterAddScreen},
-    DiceRollResultScreen: {screen: DiceRollResultScreen}
+    DiceRollResultScreen: {screen: DiceRollResultScreen},
+    ChooseCharacterScreen: {screen: ChooseCharacterScreen}
 });
 const DashboardContainer = createAppContainer(DashboardStackNavigator);
 
