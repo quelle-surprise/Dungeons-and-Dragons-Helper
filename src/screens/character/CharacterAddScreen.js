@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, Dimensions, StyleSheet, Text, ScrollView} from 'react-native';
+import {Alert, Dimensions, ScrollView, StyleSheet, Text} from 'react-native';
 import {Container, View} from 'native-base'
 import {Button, List, Switch, TextInput} from 'react-native-paper';
 import * as firebase from 'firebase';
@@ -47,31 +47,36 @@ export default class CharacterDisplayScreen extends React.Component {
 
 
     createNewCharacter = () => {
-        console.log("pushing char to user: " + this.userId)
-        firebase.database().ref(this.userId + '/characters/').push({
-            additionalSkillsNames: this.state.additionalSkillsNames,
-            name: this.state.name,
-            characterClass: this.state.characterClass,
-            level: this.state.level,
-            char: this.state.char,
-            characterRace: this.state.characterRace,
-            provenance: this.state.provenance,
-            proficiency: this.state.proficiency,
-            strength: this.state.strength,
-            dexterity: this.state.dexterity,
-            condition: this.state.condition,
-            intelligence: this.state.intelligence,
-            wisdom: this.state.wisdom,
-            charisma: this.state.charisma,
-            additionalSkill: this.state.additionalSkill,
-            skills: [' '],
-            spells: [' ']
-        }).then(() => {
-            console.log('successfully added to database')
-        }).catch(() => {
-            console.log('there were some problems during insetrion ')
-        });
-        Alert.alert("Dodano postać")
+        let c = this.state;
+        if (c.name && c.characterClass && c.level && c.char && c.characterRace && c.provenance &&
+            c.proficiency && c.strength && c.dexterity && c.condition && c.intelligence && c.wisdom && c.charisma) {
+            console.log("pushing char to user: " + this.userId)
+            firebase.database().ref(this.userId + '/characters/').push({
+                additionalSkillsNames: this.state.additionalSkillsNames,
+                name: this.state.name,
+                characterClass: this.state.characterClass,
+                level: this.state.level,
+                char: this.state.char,
+                characterRace: this.state.characterRace,
+                provenance: this.state.provenance,
+                proficiency: this.state.proficiency,
+                strength: this.state.strength,
+                dexterity: this.state.dexterity,
+                condition: this.state.condition,
+                intelligence: this.state.intelligence,
+                wisdom: this.state.wisdom,
+                charisma: this.state.charisma,
+                additionalSkill: this.state.additionalSkill
+            }).then(() => {
+                console.log('successfully added to database')
+            }).catch(() => {
+                console.log('there were some problems during insetrion ')
+            });
+            this.props.navigation.goBack();
+            Alert.alert("Pomyślnie dodano postać")
+        } else {
+            Alert.alert("Proszę wypełnić formularz")
+        }
     };
 
     generateList = () => {
