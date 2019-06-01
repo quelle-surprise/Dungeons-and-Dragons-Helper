@@ -11,22 +11,25 @@ export default class CharacterDisplayScreen extends React.Component {
             "Perswazja", "Religia", "Skradanie", "Spostrzegawczość", "Sztuka przetrwania", "Śledztwo", "Występy", "Zastraszanie", "Zwinne palce"],
         name: "", characterClass: "", level: "", char: "", characterRace: "", provenance: "", proficiency: "",
         strength: "", dexterity: "", condition: "", intelligence: "", wisdom: "", charisma: "",
-        additionalSkill: []
+        additionalSkill: [false]
     };
     character = [];
+    userId = "";
 
     constructor(props) {
         super(props);
         this.state.additionalSkill = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
         const {navigation} = this.props;
         this.character = navigation.getParam('character', [""]);
-        if (this.character !== [""]) {
+        this.userId = navigation.getParam('userId', "");
+
+        console.log("Got user: " + this.userId)
+        if (this.character.name !== "") {
             this.prepareFormForEditing(this.character)
         }
     }
 
     prepareFormForEditing = (character) => {
-        console.log(character);
         this.state.name = character.name;
         this.state.characterClass = character.characterClass;
         this.state.level = character.level;
@@ -44,7 +47,8 @@ export default class CharacterDisplayScreen extends React.Component {
 
 
     createNewCharacter = () => {
-        firebase.database().ref('characters/').push({
+        console.log("pushing char to user: " + this.userId)
+        firebase.database().ref(this.userId + '/characters/').push({
             additionalSkillsNames: this.state.additionalSkillsNames,
             name: this.state.name,
             characterClass: this.state.characterClass,

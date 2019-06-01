@@ -23,11 +23,13 @@ export default class CharacterDisplayScreen extends React.Component {
                 "charisma", "intelligence", "dexterity", "wisdom", "wisdom", "intelligence", "charisma", "charisma", "dexterity"],
             additionalSkillsWithValues: [],
             statisticsTableData: [],
-            proficiencyTableData: []
+            proficiencyTableData: [],
+            userId: ""
         };
         const {navigation} = this.props;
         this.state.character = navigation.getParam('character', [""]);
         this.state.characterId = navigation.getParam('characterId', "");
+        this.state.userId = navigation.getParam('userId', "");
 
         this.generateStatisticsTable();
         this.generateAdditionalSkillsList(this.state.additionalSkillsStat,
@@ -37,12 +39,14 @@ export default class CharacterDisplayScreen extends React.Component {
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
+            userId: this.state.userId
         });
     };
 
     editCharacterevent = () => {
         this.props.navigation.navigate('CharacterAddScreen', {
             character: this.state.character,
+            userId: this.state.userId
         });
     };
 
