@@ -95,6 +95,7 @@ export default class CharacterScreen extends React.Component {
                                     onPress={() => this.characterClickEvent(data.val(), data.key)}
                                     onLongPress={() => this.characterLongPress(secId, rowId, rowMap, data)}
                                 >
+
                                     <View style={styles.flatview}>
                                         <Image
                                             style={{width: 50, height: 50}}

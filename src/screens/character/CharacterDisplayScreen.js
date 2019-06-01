@@ -1,9 +1,9 @@
+import Icons from "assets/icons";
+import {Container, Fab, ListItem, Segment, View} from 'native-base';
 import React from "react";
 import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
-import {Container, Fab, ListItem, Segment, View} from 'native-base'
-import {Row, Rows, Table} from 'react-native-table-component';
 import {Button} from 'react-native-paper';
-import Icons from "assets/icons";
+import {Row, Rows, Table} from 'react-native-table-component';
 
 export default class CharacterDisplayScreen extends React.Component {
     constructor(props) {
@@ -40,9 +40,10 @@ export default class CharacterDisplayScreen extends React.Component {
         });
     };
 
-
     editCharacterevent = () => {
-        this.props.navigation.navigate('CharacterAddScreen', {});
+        this.props.navigation.navigate('CharacterAddScreen', {
+            character: this.state.character,
+        });
     };
 
     generateAdditionalSkillsList = (statistics, proficiency, names) => {

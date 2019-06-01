@@ -1,8 +1,7 @@
 import React from "react";
-import {Alert, Dimensions, Image, StyleSheet, Text} from 'react-native';
-import {Container, Fab, View} from 'native-base'
+import {Alert, Dimensions, StyleSheet, Text} from 'react-native';
+import {Container, View} from 'native-base'
 import {Button, List, Switch, TextInput} from 'react-native-paper';
-import Icons from "assets/icons";
 import * as firebase from 'firebase';
 
 export default class CharacterDisplayScreen extends React.Component {
@@ -12,13 +11,37 @@ export default class CharacterDisplayScreen extends React.Component {
             "Perswazja", "Religia", "Skradanie", "Spostrzegawczość", "Sztuka przetrwania", "Śledztwo", "Występy", "Zastraszanie", "Zwinne palce"],
         name: "", characterClass: "", level: "", char: "", characterRace: "", provenance: "", proficiency: "",
         strength: "", dexterity: "", condition: "", intelligence: "", wisdom: "", charisma: "",
-        switchValue: []
+        additionalSkill: []
     };
+    character = [];
 
     constructor(props) {
         super(props);
-        this.state.switchValue = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+        this.state.additionalSkill = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+        const {navigation} = this.props;
+        this.character = navigation.getParam('character', [""]);
+        if (this.character !== [""]) {
+            this.prepareFormForEditing(this.character)
+        }
     }
+
+    prepareFormForEditing = (character) => {
+        console.log(character);
+        this.state.name = character.name;
+        this.state.characterClass = character.characterClass;
+        this.state.level = character.level;
+        this.state.char = character.char;
+        this.state.characterRace = character.characterRace;
+        this.state.provenance = character.provenance;
+        this.state.proficiency = character.proficiency;
+        this.state.strength = character.strength;
+        this.state.dexterity = character.dexterity;
+        this.state.condition = character.condition;
+        this.state.intelligence = character.intelligence;
+        this.state.wisdom = character.wisdom;
+        this.state.charisma = character.charisma;
+    };
+
 
     createNewCharacter = () => {
         firebase.database().ref('characters/').push({
@@ -36,7 +59,7 @@ export default class CharacterDisplayScreen extends React.Component {
             intelligence: this.state.intelligence,
             wisdom: this.state.wisdom,
             charisma: this.state.charisma,
-            additionalSkill: this.state.switchValue
+            additionalSkill: this.state.additionalSkill
 
         }).then(() => {
             console.log('successfully added to database')
@@ -53,9 +76,9 @@ export default class CharacterDisplayScreen extends React.Component {
                 <List.Item
                     title={name}
                     left={() => <Switch
-                        value={this.state.switchValue[index]}
+                        value={this.state.additionalSkill[index]}
                         onValueChange={() => {
-                            this.state.switchValue[index] = !this.state.switchValue[index]
+                            this.state.additionalSkill[index] = !this.state.additionalSkill[index]
                         }}
                     />
                     }/>
