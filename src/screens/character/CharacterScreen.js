@@ -12,17 +12,20 @@ export default class CharacterScreen extends React.Component {
         super(props);
         this.state = {
             listViewData: data,
-            dataLoaded: false
+            dataLoaded: false,
+            userId: ""
         };
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
 
     async componentDidMount() {
-        var that = this;
-        firebase.database().ref('characters/').on('child_added', function (data) {
-            var newData = [...that.state.listViewData];
-            newData.push(data);
-            that.setState({listViewData: newData})
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.state.userId = user.uid;
+                this.getDataFromDatabase(user.uid)
+            } else {
+                console.log("User not logged in")
+            }
         });
 
         await Expo.Font.loadAsync({
@@ -30,6 +33,16 @@ export default class CharacterScreen extends React.Component {
         });
         this.setState({dataLoaded: true});
     }
+
+    getDataFromDatabase(userId) {
+        var that = this;
+        firebase.database().ref(userId + '/characters/').on('child_added', function (data) {
+            var newData = [...that.state.listViewData];
+            newData.push(data);
+            that.setState({listViewData: newData})
+        });
+    }
+
 
     async deleteRow(secId, rowId, rowMap, data) {
         await firebase.database().ref('characters/' + data.key).set(null);
@@ -42,18 +55,22 @@ export default class CharacterScreen extends React.Component {
     characterClickEvent = (character, characterId) => {
         this.props.navigation.navigate('CharacterDisplayScreen', {
             character: character,
-            characterId: characterId
+            characterId: characterId,
+            userId: this.state.userId
         });
     };
 
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
-        });
+            userId: this.state.userId
+        })
     };
 
     addCharacterEvent = () => {
-        this.props.navigation.navigate('CharacterAddScreen');
+        this.props.navigation.navigate('CharacterAddScreen', {
+            userId: this.state.userId
+        })
     };
 
 
@@ -95,6 +112,7 @@ export default class CharacterScreen extends React.Component {
                                     onPress={() => this.characterClickEvent(data.val(), data.key)}
                                     onLongPress={() => this.characterLongPress(secId, rowId, rowMap, data)}
                                 >
+
                                     <View style={styles.flatview}>
                                         <Image
                                             style={{width: 50, height: 50}}
