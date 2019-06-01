@@ -13,7 +13,7 @@
     },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/utility/app-icon.png",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
