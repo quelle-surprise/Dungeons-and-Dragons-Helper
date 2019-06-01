@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, Dimensions, StyleSheet, Text} from 'react-native';
+import {Alert, Dimensions, StyleSheet, Text, ScrollView} from 'react-native';
 import {Container, View} from 'native-base'
 import {Button, List, Switch, TextInput} from 'react-native-paper';
 import * as firebase from 'firebase';
@@ -81,7 +81,9 @@ export default class CharacterDisplayScreen extends React.Component {
                     left={() => <Switch
                         value={this.state.additionalSkill[index]}
                         onValueChange={() => {
-                            this.state.additionalSkill[index] = !this.state.additionalSkill[index]
+                            let newTable = this.state.additionalSkill;
+                            newTable[index] = !newTable[index];
+                            this.setState({additionalSkill: newTable})
                         }}
                     />
                     }/>
@@ -140,9 +142,9 @@ export default class CharacterDisplayScreen extends React.Component {
                     <Text>Dodaj</Text>
                 </Button>
 
-                <List.Section>
+                <ScrollView>
                     {this.generateList()}
-                </List.Section>
+                </ScrollView>
             </Container>
         )
     }
