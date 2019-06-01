@@ -117,15 +117,6 @@ export default class CharacterDisplayScreen extends React.Component {
                 <List.Section>
                     {this.generateList()}
                 </List.Section>
-
-                <Fab
-                    containerStyle={{}}
-                    position="bottomRight"
-                    style={{backgroundColor: "#5067FF"}}
-                    onPress={() => this.setState({editModeEnabled: false})}
-                >
-                    <View><Image source={Icons.charScreenIcons.share}/></View>
-                </Fab>
             </Container>
         )
     }

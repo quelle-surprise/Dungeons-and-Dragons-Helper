@@ -51,27 +51,27 @@ export default class CharacterDisplayScreen extends React.Component {
             switch (stat) {
                 case "dexterity":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.dexterity, proficiency, names[index]))
+                        this.state.character.dexterity, proficiency, names[index]));
                     break;
                 case "intelligence":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.intelligence, proficiency, names[index]))
+                        this.state.character.intelligence, proficiency, names[index]));
                     break;
                 case "strength":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.strength, proficiency, names[index]))
+                        this.state.character.strength, proficiency, names[index]));
                     break;
                 case "wisdom":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.wisdom, proficiency, names[index]))
+                        this.state.character.wisdom, proficiency, names[index]));
                     break;
                 case "charisma":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.charisma, proficiency, names[index]))
+                        this.state.character.charisma, proficiency, names[index]));
                     break;
                 case "condition":
                     tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.condition, proficiency, names[index]))
+                        this.state.character.condition, proficiency, names[index]));
                     break
             }
         });
@@ -217,7 +217,7 @@ export default class CharacterDisplayScreen extends React.Component {
                     position="bottomRight"
                     style={{backgroundColor: "#5067FF"}}
                     onPress={() => {
-                        this.setState({editModeEnabled: true})
+                        this.setState({editModeEnabled: true});
                         this.editCharacterevent()
                     }}
                 >

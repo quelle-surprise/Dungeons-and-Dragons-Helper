@@ -1,10 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Alert, Text, TouchableOpacity, ActivityIndicator, ImageBackground} from 'react-native';
-import {CheckBox} from 'react-native-elements'
+import {
+    ActivityIndicator,
+    Alert,
+    ImageBackground,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 
 import * as firebase from 'firebase';
 import {Font} from "expo";
-import LoadingScreen from "../LoadingScreen";
 import Icons from "assets/icons";
 
 export default class RegisterScreen extends React.Component {

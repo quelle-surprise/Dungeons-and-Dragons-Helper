@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-    StyleSheet,
-    View,
-    Text,
-    TextInput,
+    ActivityIndicator,
     Alert,
     Image,
+    ImageBackground,
+    StyleSheet,
+    Text,
+    TextInput,
     TouchableOpacity,
-    ActivityIndicator,
-    ImageBackground
+    View
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Facebook} from 'expo';
@@ -47,7 +47,7 @@ export default class LoginScreen extends React.Component {
     loginWithFacebook = async () => {
         const {type, token} = await Facebook.logInWithReadPermissionsAsync(
             fbAppId,
-            {permissions: ['public_profile']})
+            {permissions: ['public_profile']});
         if (type === 'success') {
             const credential = firebase.auth.FacebookAuthProvider.credential(token);
             firebase.auth().signInWithCredential(credential).catch((error) => {
@@ -96,7 +96,7 @@ export default class LoginScreen extends React.Component {
                     <Text style={styles.hyperlink} onPress={() => this.props.navigation.navigate('ForgotPassword')}>Zresetuj
                         hasło</Text>
                     <View style={{paddingTop: 20}}/>
-                    <Text style = {styles.text}> Nie masz konta?</Text>
+                    <Text style={styles.text}> Nie masz konta?</Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
                         <ImageBackground source={Icons.buttonIcons.buttonLight} style={{width: 143, height: 40}}>
                             <View style={styles.button}>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between'
     },
-    text: {color: "black",  fontFamily: 'Toms Handwritten', fontWeight: "normal", textAlign: "center", fontSize: 24},
+    text: {color: "black", fontFamily: 'Toms Handwritten', fontWeight: "normal", textAlign: "center", fontSize: 24},
     button: {
         marginBottom: 10,
         width: 140,
