@@ -48,10 +48,60 @@ class ChooseCharacterScreen extends React.Component {
         });
     }
 
-    addtoThisChar = (character, characterId) => {
-        var a = character + characterId;
-        Alert({character});
+    addToThisChar = (character, characterId, userId, name, type) => {
+        var skillsOrFeatures = '';
+        var finded = false, zeroValued = false;
+        var spellsResults = character.spells;
+        var skillsResults = character.skills;
+
+        if(type == 1){
+            spellsResults.forEach(element => {
+                if(element == name){
+                    finded = true;
+                };
+            });
+            skillsOrFeatures = '/spells/';
+            spellsResults.push(name);
+            if(character.spells[0] == ' '){
+                zeroValued = true;
+            }
+        }
+
+        else{
+            skillsResults.forEach(element => {
+                if(element == name){
+                    finded = true;
+                };
+            });
+            skillsOrFeatures = '/skills/';
+            skillsResults.push(name);
+            if(character.skills[0] == ' '){
+                zeroValued = true;
+            }
+        }
+
+        if(finded == false){
+            if(zeroValued){
+                firebase.database().ref(userId + '/characters/' + characterId + skillsOrFeatures).update({
+                    0: name
+            });
+            }
+            else{
+                firebase.database().ref(userId + '/characters/' + characterId + '/').update({
+                    spells : spellsResults,
+                    skills : skillsResults
+            });
+            }
+
+            this.props.navigation.goBack();
+            Alert.alert("Dodano do postaci.");
+        }
+        else{
+            Alert.alert("Ta postać już się tego nauczyła.");
+        }
+
     }
+    
 
     render(){
         return(
@@ -60,7 +110,7 @@ class ChooseCharacterScreen extends React.Component {
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
             renderRow={(data) =>
                 <ListItem
-                    onPress={() => addToThisChar(data.val(), data.key)}
+                    onPress={() => this.addToThisChar(data.val(), data.key, this.state.userId, this.state.name, this.state.type)}
                 >
                     <View style={styles.flatview}>
                         <Image

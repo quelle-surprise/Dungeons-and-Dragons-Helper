@@ -63,7 +63,9 @@ export default class CharacterDisplayScreen extends React.Component {
             intelligence: this.state.intelligence,
             wisdom: this.state.wisdom,
             charisma: this.state.charisma,
-            additionalSkill: this.state.additionalSkill
+            additionalSkill: this.state.additionalSkill,
+            skills: [' '],
+            spells: [' ']
         }).then(() => {
             console.log('successfully added to database')
         }).catch(() => {
