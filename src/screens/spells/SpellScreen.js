@@ -1,5 +1,7 @@
 import React from 'react';
-import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import Icons from "assets/icons";
+import {Container, Content} from 'native-base'
 
 
 export default class SpellScreen extends React.Component {
@@ -39,6 +41,13 @@ export default class SpellScreen extends React.Component {
         this.getData();
     }
 
+    addCharacterEvent = () => {
+        this.props.navigation.navigate('ChooseCharacterScreen', {
+            name: this.state.data.name, 
+            type: 1
+        });
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -67,6 +76,8 @@ export default class SpellScreen extends React.Component {
         }
 
         return (
+            <Container style={styles.container}>
+            <Content>
             <ScrollView style={styles.view}>
                 <Text style={styles.largeText}>
                     Nazwa: {this.state.data.name}
@@ -89,9 +100,15 @@ export default class SpellScreen extends React.Component {
                     <Text style={styles.mediumBoldText}>Klasy: </Text>
                     <Text style={styles.smallText}>{classes}</Text>
                 </Text>
-
-
             </ScrollView>
+            </Content>
+                <TouchableOpacity activeOpacity={0.5} 
+                                  onPress={() => this.addCharacterEvent()}
+                                  style={styles.TouchableOpacityStyle}>
+                    <Image source={Icons.charScreenIcons.plus} style={styles.FloatingButtonStyle}/>
+                </TouchableOpacity>
+
+            </Container>
         )
 
     }
@@ -140,5 +157,20 @@ const styles = StyleSheet.create({
         fontFamily: 'Toms Handwritten',
         fontSize: 25,
         textAlign: 'center',
-    }
+    },
+    TouchableOpacityStyle: {
+        position: 'absolute',
+        width: 40,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+    }, 
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+
+    },
 });
