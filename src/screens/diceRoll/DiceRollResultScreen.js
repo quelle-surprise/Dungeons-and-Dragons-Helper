@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Text, StyleSheet, View, FlatList } from 'react-native';
 import {Font} from "expo";
-
+import Icons from "assets/icons";
 
   class DiceRollResultScreen extends React.Component {
     constructor(props) {
@@ -44,7 +44,8 @@ import {Font} from "expo";
     alignItems:'center',
     justifyContent:'center'
    }}>
-  <Image source={require('../../../assets/dnd-logo.png')} style={{width: 100, height: 100}}/>
+     <View style={{paddingTop: 15}} />  
+  <Image source={Icons.imagesIcons.diceRollImage} style={{width: 200, height: 100}}/>
   <Text style={styles.buttonText}>
    Suma rzutów: {this.state.result}
   </Text>
