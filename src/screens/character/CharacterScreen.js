@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View, ListView, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
-import {Container, Content, ListItem, List} from 'native-base'
+import {ActivityIndicator, Alert, Image, ListView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Container, Content, List, ListItem} from 'native-base'
 import * as firebase from 'firebase';
 import Icons from "assets/icons";
 
-var data = []
+var data = [];
 
 export default class CharacterScreen extends React.Component {
 
@@ -13,17 +13,17 @@ export default class CharacterScreen extends React.Component {
         this.state = {
             listViewData: data,
             dataLoaded: false
-        }
+        };
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
 
     async componentDidMount() {
-        var that = this
+        var that = this;
         firebase.database().ref('characters/').on('child_added', function (data) {
-            var newData = [...that.state.listViewData]
-            newData.push(data)
+            var newData = [...that.state.listViewData];
+            newData.push(data);
             that.setState({listViewData: newData})
-        })
+        });
 
         await Expo.Font.loadAsync({
             'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
@@ -32,16 +32,11 @@ export default class CharacterScreen extends React.Component {
     }
 
     async deleteRow(secId, rowId, rowMap, data) {
-        await firebase.database().ref('characters/' + data.key).set(null)
+        await firebase.database().ref('characters/' + data.key).set(null);
         rowMap[`${secId}${rowId}`].props.closeRow();
         var newData = [...this.state.listViewData];
-        newData.splice(rowId, 1)
+        newData.splice(rowId, 1);
         this.setState({listViewData: newData});
-    }
-
-
-    FloatingButtonEvent = () => {
-        Alert.alert("Doesnt work")
     }
 
     characterClickEvent = (character, characterId) => {
@@ -49,17 +44,17 @@ export default class CharacterScreen extends React.Component {
             character: character,
             characterId: characterId
         });
-    }
+    };
 
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
         });
-    }
+    };
 
     addCharacterEvent = () => {
         this.props.navigation.navigate('CharacterAddScreen');
-    }
+    };
 
 
     characterLongPress = (secId, rowId, rowMap, data) => {
@@ -73,7 +68,7 @@ export default class CharacterScreen extends React.Component {
             ],
             {cancelable: true}
         )
-    }
+    };
 
     makeSure = (secId, rowId, rowMap, data) => {
         Alert.alert(
@@ -85,7 +80,7 @@ export default class CharacterScreen extends React.Component {
             ],
             {cancelable: true}
         )
-    }
+    };
 
     render() {
         if (this.state.dataLoaded) {
@@ -105,9 +100,9 @@ export default class CharacterScreen extends React.Component {
                                             style={{width: 50, height: 50}}
                                             source={Icons.charScreenIcons.characterIcon}
                                         />
-                                        <Text style={styles.details}> {data.val().imię},</Text>
+                                        <Text style={styles.details}> {data.val().name},</Text>
                                         <Text
-                                            style={styles.details}> {data.val().klasa} poziomu {data.val().poziom}</Text>
+                                            style={styles.details}> {data.val().characterClass} poziomu {data.val().level}</Text>
                                     </View>
                                 </ListItem>
                             }

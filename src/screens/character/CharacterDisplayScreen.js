@@ -1,14 +1,8 @@
 import React from "react";
-import {StyleSheet, Text, Alert, FlatList, Image, Dimensions} from 'react-native';
-import {ListItem} from 'native-base'
-import {Table, Row, Rows} from 'react-native-table-component';
-import {
-    Container,
-    Fab,
-    View,
-    Segment
-} from "native-base";
-import { Button, TextInput} from 'react-native-paper';
+import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
+import {Container, Fab, ListItem, Segment, View} from 'native-base'
+import {Row, Rows, Table} from 'react-native-table-component';
+import {Button} from 'react-native-paper';
 import Icons from "assets/icons";
 
 export default class CharacterDisplayScreen extends React.Component {
@@ -20,13 +14,13 @@ export default class CharacterDisplayScreen extends React.Component {
             character: [],
             seg: 1,
             editModeEnabled: false,
-            tableHead: ['Sił', 'Zre', 'Kon', 'Int', 'Mdr', 'Cha'],
+            tableHead: ['Sił', 'Zrę', 'Kon', 'Int', 'Mdr', 'Char'],
             additionalSkillsNames: [
-                "Akrobatyka", "Arkana","Atletyka", "Empatia","Historia","Medycyna", "Natura","Opieka nad zwierzętami","Oszustwo",
-                "Perswazja", "Religia","Skradanie","Spostrzegawczość","Sztuka przetrwania","Śledztwo","Występy","Zastraszanie","Zwinne palce"],
+                "Akrobatyka", "Arkana", "Atletyka", "Empatia", "Historia", "Medycyna", "Natura", "Opieka nad zwierzętami", "Oszustwo",
+                "Perswazja", "Religia", "Skradanie", "Spostrzegawczość", "Sztuka przetrwania", "Śledztwo", "Występy", "Zastraszanie", "Zwinne palce"],
             additionalSkillsStat: [
-                "Zre", "Int","Sił", "Mdr","Int","Mdr", "Int","Mdr","Cha",
-                "Cha", "Int","Zre","Mdr","Mdr","Int","Cha","Cha","Zre"],
+                "dexterity", "intelligence", "strength", "wisdom", "intelligence", "wisdom", "intelligence", "wisdom", "charisma",
+                "charisma", "intelligence", "dexterity", "wisdom", "wisdom", "intelligence", "charisma", "charisma", "dexterity"],
             additionalSkillsWithValues: [],
             statisticsTableData: [],
             proficiencyTableData: []
@@ -35,8 +29,8 @@ export default class CharacterDisplayScreen extends React.Component {
         this.state.character = navigation.getParam('character', [""]);
         this.state.characterId = navigation.getParam('characterId', "");
 
-        this.generateStatisticsTable()
-        this.generateAdditionalSkillsList(this.state.additionalSkillsStat, 
+        this.generateStatisticsTable();
+        this.generateAdditionalSkillsList(this.state.additionalSkillsStat,
             this.state.character.proficiency, this.state.additionalSkillsNames)
     }
 
@@ -44,98 +38,97 @@ export default class CharacterDisplayScreen extends React.Component {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
         });
-    }
+    };
 
-    
+
     editCharacterevent = () => {
-        this.props.navigation.navigate('CharacterAddScreen', {
-        });
-    }
+        this.props.navigation.navigate('CharacterAddScreen', {});
+    };
 
-    generateAdditionalSkillsList = (statistics, proficiency, names ) => {
-        let tab = []
-        statistics.forEach( (stat, index) => {
-            switch(stat) {
-                case "Zre":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.zręczność, proficiency, names[index]))
-                    break
-                case "Int":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.inteligencja, proficiency, names[index]))
-                break
-                case "Sił":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.siła, proficiency, names[index]))
-                    break
-                case "Mdr":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.mądrość, proficiency, names[index]))
-                    break
-                case "Cha":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.charyzma, proficiency, names[index]))
-                    break
-                case "Kon":
-                        tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
-                        this.state.character.kondycja, proficiency, names[index]))
+    generateAdditionalSkillsList = (statistics, proficiency, names) => {
+        let tab = [];
+        statistics.forEach((stat, index) => {
+            switch (stat) {
+                case "dexterity":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.dexterity, proficiency, names[index]))
+                    break;
+                case "intelligence":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.intelligence, proficiency, names[index]))
+                    break;
+                case "strength":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.strength, proficiency, names[index]))
+                    break;
+                case "wisdom":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.wisdom, proficiency, names[index]))
+                    break;
+                case "charisma":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.charisma, proficiency, names[index]))
+                    break;
+                case "condition":
+                    tab.push(this.chekProficiency(this.state.character.additionalSkill[index],
+                        this.state.character.condition, proficiency, names[index]))
                     break
             }
         });
         this.state.additionalSkillsWithValues = tab
-    }
+    };
 
     chekProficiency = (addProficiency, statvalue, proficiency, statname) => {
-        if(addProficiency == true) {
+        if (addProficiency == true) {
             return ((statvalue + proficiency) + " " + statname)
-        }
-        else
+        } else
             return (statvalue + " " + statname)
-    }
+    };
 
     generateStatisticsTable = () => {
-        let character = this.state.character
+        let character = this.state.character;
         let statistics = [
-            character.siła, character.zręczność,
-            character.kondycja, character.inteligencja,
-            character.mądrość, character.charyzma]
+            character.strength, character.dexterity,
+            character.condition, character.intelligence,
+            character.wisdom, character.charisma];
         this.generateTableWithModifiersRow(statistics)
-    }
+    };
 
     generateTableWithModifiersRow = (statistics) => {
-        let modifiers = []
+        let modifiers = [];
         statistics.forEach(stat => {
             modifiers.push(Math.floor((stat - 10) / 2))
         });
-        this.state.statisticsTableData = [statistics, modifiers]
+        this.state.statisticsTableData = [statistics, modifiers];
         this.generateProficiencyTable(modifiers)
-    }
+    };
 
     generateProficiencyTable = (modifiers) => {
-        let proficiency = []
+        let proficiency = [];
         modifiers.forEach(modifier => {
             proficiency.push(modifier + this.state.character.proficiency)
         });
         this.state.proficiencyTableData.push(proficiency)
-    }
+    };
+
 
     render() {
         return (
             <Container style={styles.container}>
 
-                            <View style={{height: 100}}>
-                            <Text
-                                style={styles.name}> {this.state.character.imię}, {this.state.character.klasa}  </Text>
-                            <Text style={styles.name}> Poziom {this.state.character.poziom}</Text>
-                            <Fab
-                                containerStyle={{}}
-                                style={styles.fab}
-                                onPress={() => this.shareCharacterEvent(this.state.characterId)}
-                            >
-                                <View><Image source={Icons.charScreenIcons.share}/></View>
-                            </Fab>
-                        </View>
-                
+                <View style={{height: 100}}>
+                    <Text
+                        style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
+                    <Text style={styles.name}> Poziom {this.state.character.level}</Text>
+                    <Fab
+                        containerStyle={{}}
+                        style={styles.fab}
+                        onPress={() => this.shareCharacterEvent(this.state.characterId)}
+                    >
+                        <View><Image source={Icons.charScreenIcons.share}/></View>
+                    </Fab>
+                </View>
+
                 <Segment style={styles.segment}>
                     <Button
                         mode="outlined"
@@ -163,24 +156,24 @@ export default class CharacterDisplayScreen extends React.Component {
                     </Button>
                 </Segment>
 
+                <View>
+                    {this.state.seg === 1 &&
                     <View>
-                        {this.state.seg === 1 &&
-                        <View>
-                            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                                <Row data={this.state.tableHead} style={styles.head} textStyle={styles.details}/>
-                                <Rows data={this.state.statisticsTableData} textStyle={styles.details}/>
-                            </Table>
+                        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+                            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.details}/>
+                            <Rows data={this.state.statisticsTableData} textStyle={styles.details}/>
+                        </Table>
 
-                            <Text style={styles.details}>Premia z biegłości: {this.state.character.proficiency}</Text>
-                            <Text style={styles.details}>Rzuty obronne</Text>
+                        <Text style={styles.details}>Premia z biegłości: {this.state.character.proficiency}</Text>
+                        <Text style={styles.details}>Rzuty obronne</Text>
 
-                            <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                                <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
-                            </Table>
+                        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+                            <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
+                        </Table>
 
-                            <Text> Umiejętności </Text>
-                            
-                            <FlatList
+                        <Text> Umiejętności </Text>
+
+                        <FlatList
                             data={this.state.additionalSkillsWithValues}
                             renderItem={({item}) =>
                                 <ListItem>
@@ -191,38 +184,38 @@ export default class CharacterDisplayScreen extends React.Component {
                             }
                         />
 
-                        </View>
-                        }
-                        {this.state.seg === 2 &&
-                        <FlatList
-                            data={this.state.character.skills}
-                            renderItem={({item}) =>
-                                <ListItem>
-                                    <View style={styles.flatview}>
-                                        <Text style={styles.details}> {item}</Text>
-                                    </View>
-                                </ListItem>
-                            }
-                        />
-                        }
-                        {this.state.seg === 3 &&
-                        <FlatList
-                            data={this.state.character.spells}
-                            renderItem={({item}) =>
-                                <ListItem>
-                                    <View style={styles.flatview}>
-                                        <Text style={styles.details}> {item}</Text>
-                                    </View>
-                                </ListItem>
-                            }
-                        />
-                        }
                     </View>
-                
+                    }
+                    {this.state.seg === 2 &&
+                    <FlatList
+                        data={this.state.character.skills}
+                        renderItem={({item}) =>
+                            <ListItem>
+                                <View style={styles.flatview}>
+                                    <Text style={styles.details}> {item}</Text>
+                                </View>
+                            </ListItem>
+                        }
+                    />
+                    }
+                    {this.state.seg === 3 &&
+                    <FlatList
+                        data={this.state.character.spells}
+                        renderItem={({item}) =>
+                            <ListItem>
+                                <View style={styles.flatview}>
+                                    <Text style={styles.details}> {item}</Text>
+                                </View>
+                            </ListItem>
+                        }
+                    />
+                    }
+                </View>
+
                 <Fab
                     containerStyle={{}}
                     position="bottomRight"
-                    style={{ backgroundColor: "#5067FF" }}
+                    style={{backgroundColor: "#5067FF"}}
                     onPress={() => {
                         this.setState({editModeEnabled: true})
                         this.editCharacterevent()
@@ -241,7 +234,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF"
     },
     fab: {
-        backgroundColor: "transparent", 
+        backgroundColor: "transparent",
         elevation: 0,
         position: 'absolute',
         margin: 16,
@@ -249,7 +242,7 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     tableInput: {
-        flex: Math.round((Dimensions.get('window').width)/6)
+        flex: Math.round((Dimensions.get('window').width) / 6)
     },
     head: {height: 40, backgroundColor: '#f1f8ff'},
     text: {margin: 6},
@@ -279,7 +272,7 @@ const styles = StyleSheet.create({
         fontSize: 25
     },
     button: {
-        width: Math.round( (Dimensions.get('window').width)/3),
+        width: Math.round((Dimensions.get('window').width) / 3),
         borderRadius: 5
     },
     segment: {
