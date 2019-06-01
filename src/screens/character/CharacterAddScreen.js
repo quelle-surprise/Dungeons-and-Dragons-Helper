@@ -77,7 +77,6 @@ export default class CharacterDisplayScreen extends React.Component {
         } else {
             Alert.alert("Proszę wypełnić formularz")
         }
-
     };
 
     generateList = () => {

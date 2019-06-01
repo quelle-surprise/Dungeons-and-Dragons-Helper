@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ActivityIndicator, FlatList, StyleSheet, View} from "react-native";
+import {ActivityIndicator, FlatList, StyleSheet, View, Alert} from "react-native";
 import {ListItem, SearchBar} from "react-native-elements";
 import {List} from "native-base";
 import {Font} from "expo";
@@ -97,6 +97,26 @@ export default class FeaturesScreen extends PureComponent {
         );
     };
 
+    featureLongPress = (item) => {
+        Alert.alert(
+            'Co chcesz zrobić z tą umiejętnością?',
+            '',
+            [
+                {text: 'Powrót', onPress: () => console.log('Return')},
+                {text: 'Dodaj umiejętność do postaci', onPress: () => this.addCharacterEvent(item.name)}
+            ],
+            {cancelable: true}
+        )
+    }
+
+    addCharacterEvent = (name) => {
+        this.props.navigation.navigate('ChooseCharacterScreen', {
+            name: name, 
+            type: 2
+        });
+    }
+
+
     render() {
         return (
             <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}>
@@ -109,8 +129,8 @@ export default class FeaturesScreen extends PureComponent {
                             iconRight
                             onPress={() => this.props.navigation.navigate('FeatureScreen', {
                                 url: item.url
-                            })
-                            }
+                            })}
+                            onLongPress={() => this.featureLongPress(item)}
                         />
                     )}
                     keyExtractor={item => item.url}
