@@ -1,9 +1,9 @@
+import Icons from "assets/icons";
+import {Container, Fab, ListItem, Segment, View} from 'native-base';
 import React from "react";
 import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
-import {Container, Fab, ListItem, Segment, View} from 'native-base'
-import {Row, Rows, Table} from 'react-native-table-component';
 import {Button} from 'react-native-paper';
-import Icons from "assets/icons";
+import {Row, Rows, Table} from 'react-native-table-component';
 
 export default class CharacterDisplayScreen extends React.Component {
     constructor(props) {
@@ -23,11 +23,13 @@ export default class CharacterDisplayScreen extends React.Component {
                 "charisma", "intelligence", "dexterity", "wisdom", "wisdom", "intelligence", "charisma", "charisma", "dexterity"],
             additionalSkillsWithValues: [],
             statisticsTableData: [],
-            proficiencyTableData: []
+            proficiencyTableData: [],
+            userId: ""
         };
         const {navigation} = this.props;
         this.state.character = navigation.getParam('character', [""]);
         this.state.characterId = navigation.getParam('characterId', "");
+        this.state.userId = navigation.getParam('userId', "");
 
         this.generateStatisticsTable();
         this.generateAdditionalSkillsList(this.state.additionalSkillsStat,
@@ -37,12 +39,17 @@ export default class CharacterDisplayScreen extends React.Component {
     shareCharacterEvent = (chadacterId) => {
         this.props.navigation.navigate('ShareCharacterScreen', {
             characterId: chadacterId,
+            userId: this.state.userId
         });
     };
 
-
     editCharacterevent = () => {
-        this.props.navigation.navigate('CharacterAddScreen', {});
+        this.props.navigation.navigate('CharacterAddScreen', {
+            character: this.state.character,
+            userId: this.state.userId,
+            charId: this.state.characterId,
+            type: 2
+        });
     };
 
     generateAdditionalSkillsList = (statistics, proficiency, names) => {
@@ -80,7 +87,7 @@ export default class CharacterDisplayScreen extends React.Component {
 
     chekProficiency = (addProficiency, statvalue, proficiency, statname) => {
         if (addProficiency == true) {
-            return ((statvalue + proficiency) + " " + statname)
+            return ((Number(statvalue) + Number(proficiency)) + " " + statname)
         } else
             return (statvalue + " " + statname)
     };
@@ -106,7 +113,7 @@ export default class CharacterDisplayScreen extends React.Component {
     generateProficiencyTable = (modifiers) => {
         let proficiency = [];
         modifiers.forEach(modifier => {
-            proficiency.push(modifier + this.state.character.proficiency)
+            proficiency.push(Number(modifier) + Number(this.state.character.proficiency))
         });
         this.state.proficiencyTableData.push(proficiency)
     };
@@ -116,10 +123,11 @@ export default class CharacterDisplayScreen extends React.Component {
         return (
             <Container style={styles.container}>
 
-                <View style={{height: 100}}>
+                <View style={{height: 150}}>
                     <Text
                         style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
-                    <Text style={styles.name}> Poziom {this.state.character.level}</Text>
+                    <Text style={styles.name}> Poziom: {this.state.character.level}</Text>
+                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.provenance}</Text>
                     <Fab
                         containerStyle={{}}
                         style={styles.fab}
@@ -171,18 +179,19 @@ export default class CharacterDisplayScreen extends React.Component {
                             <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
                         </Table>
 
-                        <Text> Umiejętności </Text>
-
-                        <FlatList
-                            data={this.state.additionalSkillsWithValues}
-                            renderItem={({item}) =>
-                                <ListItem>
-                                    <View>
-                                        <Text style={styles.details}> {item}</Text>
-                                    </View>
-                                </ListItem>
-                            }
-                        />
+                        <Text style={styles.details}> Umiejętności </Text>
+                        <View style={{height: 240}}>
+                            <FlatList
+                                data={this.state.additionalSkillsWithValues}
+                                renderItem={({item}) =>
+                                    <ListItem>
+                                        <View>
+                                            <Text style={styles.details}> {item}</Text>
+                                        </View>
+                                    </ListItem>
+                                }
+                            />
+                        </View>
 
                     </View>
                     }
