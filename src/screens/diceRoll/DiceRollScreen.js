@@ -38,7 +38,7 @@ class DiceRollScreen extends React.Component {
 
     render() {
         return (
-            <KeyboardAwareScrollView enableOnAndroid={true} resetScrollToCoords={{x: 0, y: 0}} contentContainerStyle={{
+            <KeyboardAwareScrollView enableOnAndroid={true} resetScrollToCoords={{x: 0, y: 0}} extraScrollHeight={35} contentContainerStyle={{
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center'
