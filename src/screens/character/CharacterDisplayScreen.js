@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     fabEdit: {
-        backgroundColor: "#bababa",
+        backgroundColor: "transparent",
         elevation: 0,
         position: 'absolute',
         margin: 16,
