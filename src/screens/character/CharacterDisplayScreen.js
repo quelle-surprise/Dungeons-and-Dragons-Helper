@@ -167,16 +167,16 @@ export default class CharacterDisplayScreen extends React.Component {
                 <View>
                     {this.state.seg === 1 &&
                     <View>
-                        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.details}/>
-                            <Rows data={this.state.statisticsTableData} textStyle={styles.details}/>
+                        <Table borderStyle={{borderWidth: 2, borderColor: '#282828'}}>
+                            <Row data={this.state.tableHead} style={styles.head} textStyle={styles.detailsTable}/>
+                            <Rows data={this.state.statisticsTableData} textStyle={styles.detailsTable}/>
                         </Table>
 
                         <Text style={styles.details}>Premia z biegłości: {this.state.character.proficiency}</Text>
                         <Text style={styles.details}>Rzuty obronne</Text>
 
-                        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                            <Rows data={this.state.proficiencyTableData} textStyle={styles.details}/>
+                        <Table borderStyle={{borderWidth: 2, borderColor: '#282828'}}>
+                            <Rows data={this.state.proficiencyTableData} textStyle={styles.detailsTable}/>
                         </Table>
 
                         <Text style={styles.details}> Umiejętności </Text>
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     tableInput: {
         flex: Math.round((Dimensions.get('window').width) / 6)
     },
-    head: {height: 40, backgroundColor: '#f1f8ff'},
+    head: {height: 40, backgroundColor: '#bababa'},
     text: {margin: 6},
     title: {
         fontSize: 25,
@@ -287,6 +287,11 @@ const styles = StyleSheet.create({
     details: {
         fontFamily: 'Toms Handwritten',
         fontSize: 25
+    },
+    detailsTable: {
+        fontFamily: 'Toms Handwritten',
+        fontSize: 25,
+        textAlign: 'center'
     },
     button: {
         width: Math.round((Dimensions.get('window').width) / 3),
