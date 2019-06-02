@@ -13,22 +13,22 @@ Aplikacja **DnD Helper** jest propozycją dla osób grających w papierowe RPG w
 
 #### Lista wyboru postaci:
 ![Lista wyboru postaci](https://cdn.discordapp.com/attachments/539895893122482176/584782025668689940/Screenshot_2019-06-02-18-33-54-202_host.exp.exponent.png)
-
+---
 #### Karta postaci:
 ![Karta postaci](https://cdn.discordapp.com/attachments/539895893122482176/584784687537324033/Screenshot_2019-06-02-18-45-26-012_host.exp.exponent.png)
-
+---
 #### Rzut kośćmi:
 ![Rzut kośćmi](https://cdn.discordapp.com/attachments/539895893122482176/584782027056742400/Screenshot_2019-06-02-18-33-58-144_host.exp.exponent.png)
-
+---
 #### Lista umiejętności:
 ![Lista umiejętności](https://cdn.discordapp.com/attachments/539895893122482176/584782025064448001/Screenshot_2019-06-02-18-34-01-589_host.exp.exponent.png)
-
+---
 #### Lista zaklęć:
 ![Lista zaklęć](https://cdn.discordapp.com/attachments/539895893122482176/584782026352230460/Screenshot_2019-06-02-18-34-04-195_host.exp.exponent.png)
-
+---
 #### Lista potworów:
 ![Lista potworów](https://cdn.discordapp.com/attachments/539895893122482176/584782025668689944/Screenshot_2019-06-02-18-34-06-828_host.exp.exponent.png)
-
+---
 #### Diagram UML aplikacji:
 ![Diagram UML aplikacji](https://trello-attachments.s3.amazonaws.com/5cc59ea711e84c8f9a56c7e3/5cdbfbb1252bcb0afa2a476c/4deb5df74ac1f21864d0c48426f9ad35/image.png)
 
