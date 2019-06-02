@@ -1,6 +1,5 @@
 # DnD Helper
-Pomocnik gracza
----------------
+## Pomocnik gracza
 
 Ze względu na rosnącą popularność systemu RPG Dungeons and Dragons 5e, dodatkowo podsycaną niedawną premierą na polskim rynku podręcznika do rozgrywki, pojawia się zapotrzebowanie na pomoce dla graczy. Projekt **DnD Helper** jest wyjściem naprzeciw takim potrzebom, zbierając w jednym miejscu podstawowe funkcjonalności, niezbędne do pełnego cieszenia sie zabawą.
 
