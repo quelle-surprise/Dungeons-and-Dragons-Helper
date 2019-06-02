@@ -31,7 +31,6 @@ export default class CharacterScreen extends React.Component {
         await Expo.Font.loadAsync({
             'Toms Handwritten': require('../../../assets/fonts/TomsHandwritten.ttf')
         });
-        this.setState({dataLoaded: true});
     }
 
     getDataFromDatabase(userId) {
@@ -40,6 +39,7 @@ export default class CharacterScreen extends React.Component {
             var newData = [...that.state.listViewData];
             newData.push(data);
             that.setState({listViewData: newData})
+            that.setState({dataLoaded: true});
         });
     }
 
