@@ -29,6 +29,9 @@ Aplikacja **DnD Helper** jest propozycją dla osób grających w papierowe RPG w
 #### Lista potworów:
 ![Lista potworów](https://cdn.discordapp.com/attachments/539895893122482176/584782025668689944/Screenshot_2019-06-02-18-34-06-828_host.exp.exponent.png)
 
+#### Diagram UML aplikacji:
+![Diagram UML aplikacji](https://trello-attachments.s3.amazonaws.com/5cc59ea711e84c8f9a56c7e3/5cdbfbb1252bcb0afa2a476c/4deb5df74ac1f21864d0c48426f9ad35/image.png)
+
 ### Linki:
 * [Prototyp](https://ninjamock.com/s/KRJTJDx)
 * [Aplikacja](https://expo.io/@firebasednd/RMA-DnD)
