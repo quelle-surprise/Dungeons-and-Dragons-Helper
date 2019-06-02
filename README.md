@@ -11,13 +11,13 @@ Projekt został zrealizowany w ramach przedmiotu Bogate Aplikacje Internetowe na
 
 Aplikacja **DnD Helper** jest propozycją dla osób grających w papierowe RPG w systemie Dungeons and Dragons. Zaprojektowana z myślą o najnowszej wersji systemu, *5e*, umożliwia użytkownikom przechowywanie informacji o wszystkich posiadanych przez nich postaciach, jak również na szybkie wyszukiwanie i przypisywanie do kart postaci zaklęć i umiejętności, oraz udostepnianie tych informacji innym graczom. Ponadto aplikacja wyposażona jest w funkcjonalność rzutu koścmi, dzięki czemu znika konieczność posiadania własnego ich zestawu. Mistrzowie Gry na pewno docenią też możliwość szybkiego podglądu statystyk i umiejętności dowolnego potwora.
 
-![Lista wyboru postaci]()
+![Lista wyboru postaci](https://cdn.discordapp.com/attachments/539895893122482176/584782025668689940/Screenshot_2019-06-02-18-33-54-202_host.exp.exponent.png)
 ![Karta postaci]()
-![Rzut kośćmi]()
+![Rzut kośćmi](https://cdn.discordapp.com/attachments/539895893122482176/584782027056742400/Screenshot_2019-06-02-18-33-58-144_host.exp.exponent.png)
 
-![Lista umiejętności]()
-![Lista zaklęć]()
-![Lista potworów]()
+![Lista umiejętności](https://cdn.discordapp.com/attachments/539895893122482176/584782025064448001/Screenshot_2019-06-02-18-34-01-589_host.exp.exponent.png)
+![Lista zaklęć](https://cdn.discordapp.com/attachments/539895893122482176/584782026352230460/Screenshot_2019-06-02-18-34-04-195_host.exp.exponent.png)
+![Lista potworów](https://cdn.discordapp.com/attachments/539895893122482176/584782025668689944/Screenshot_2019-06-02-18-34-06-828_host.exp.exponent.png)
 
 ### Linki:
 * [Prototyp](https://ninjamock.com/s/KRJTJDx)
