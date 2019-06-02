@@ -39,8 +39,8 @@ export default class CharacterScreen extends React.Component {
             var newData = [...that.state.listViewData];
             newData.push(data);
             that.setState({listViewData: newData})
-            that.setState({dataLoaded: true});
         });
+        that.setState({dataLoaded: true});
     }
 
 
