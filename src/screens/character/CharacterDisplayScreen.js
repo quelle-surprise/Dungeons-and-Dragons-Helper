@@ -4,6 +4,7 @@ import React from "react";
 import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-paper';
 import {Row, Rows, Table} from 'react-native-table-component';
+
 var deviceHeight = Math.round(Dimensions.get('window').height)
 var topDataHeight = 508
 
@@ -128,7 +129,7 @@ export default class CharacterDisplayScreen extends React.Component {
                     <Text
                         style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
                     <Text style={styles.name}> Poziom: {this.state.character.level}</Text>
-                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.provenance}</Text>
+                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.characterRace}, {this.state.character.provenance}</Text>
                     <Fab
                         containerStyle={{}}
                         style={styles.fab}
