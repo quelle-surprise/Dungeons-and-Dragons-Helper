@@ -180,7 +180,7 @@ export default class CharacterDisplayScreen extends React.Component {
                         </Table>
 
                         <Text style={styles.details}> Umiejętności </Text>
-                        <View style={{height: 240}}>
+                        <View style={{height: 230}}>
                             <FlatList
                                 data={this.state.additionalSkillsWithValues}
                                 renderItem={({item}) =>
