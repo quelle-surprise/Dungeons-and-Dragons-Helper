@@ -105,13 +105,24 @@ export default class LoginScreen extends React.Component {
                         </ImageBackground>
                     </TouchableOpacity>
                     <View style={styles.container}>
-                        <SocialIcon
+                        {/* <SocialIcon
                             title='Kontynuuj z Facebook'
                             button
                             type='facebook'
                             style={styles.buttonFb}
                             onPress={this.loginWithFacebook}
-                        />
+                        /> */}
+                        
+                        <ImageBackground source={Icons.buttonIcons.fbButton} style={styles.buttonFb}>
+                            <SocialIcon 
+                                type='facebook'
+                                button
+                                title='Kontynuuj z Facebook'
+                                style={{height: 25, width:170, elevation:0}}
+                                onPress={this.loginWithFacebook}
+                            />
+                        </ImageBackground>
+                        
                     </View>
                 </View>
             );
@@ -132,6 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     text: {color: "black", fontFamily: 'Toms Handwritten', fontWeight: "normal", textAlign: "center", fontSize: 24},
+    textFb: {color: "white", fontFamily: 'Toms Handwritten', fontWeight: "normal", textAlign: "center", fontSize: 22},
     button: {
         marginBottom: 10,
         width: 140,
@@ -140,11 +152,10 @@ const styles = StyleSheet.create({
     },
     buttonFb: {
         marginBottom: 20,
-        width: 180,
-        height: 35,
+        width: 190,
+        height: 40,
         alignItems: 'center',
-        borderColor: 'black',
-        borderWidth: 1
+        flexDirection:'row'
     },
     buttonText: {
         fontFamily: 'Toms Handwritten',

@@ -188,8 +188,8 @@ const styles = StyleSheet.create({
     },
     FloatingButtonStyle: {
         resizeMode: 'contain',
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
     },
     flatview: {
         flexDirection: 'row',
