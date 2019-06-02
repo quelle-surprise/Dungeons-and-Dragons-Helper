@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+title: RMA-DnD
+description: short description of app
+logo: https://www.underconsideration.com/brandnew/archives/dungeons_and_dragons_40_ampersand_flat.png
+show_downloads: "true"
