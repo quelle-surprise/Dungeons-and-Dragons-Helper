@@ -86,7 +86,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 tabBarIcon: ({tintColor}) => {
                     return (
                         <Image
-                            source={Icons.bottomTabNavigatorIcons.monsters}
+                            source={Icons.bottomTabNavigatorIcons.qrScan}
                         />
                     );
                 }
@@ -96,6 +96,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
     {
         tabBarOptions: {
             showLabel: false,
+            activeTintColor: '#bababa',
             inactiveTintColor: 'grey',
             style: {
                 backgroundColor: '#f2f2f2',
@@ -103,7 +104,8 @@ const DashboardTabNavigator = createMaterialTopTabNavigator({
                 borderTopColor: 'grey'
             },
             indicatorStyle: {
-                height: 0
+                height: '100%',
+                backgroundColor: '#bababa'
             },
             showIcon: true
         },

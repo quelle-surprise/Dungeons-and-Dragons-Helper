@@ -70,7 +70,7 @@ export default class MonsterScreen extends React.Component {
                     HP: {this.state.data.hit_dice}{"\n"}
                     Prędkość: {this.state.data.speed}{"\n"}
                 </Text>
-                <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+                <Table borderStyle={{borderWidth: 2, borderColor: '#282828'}}>
                     <Row data={this.state.tableHead} style={styles.head} textStyle={styles.details}/>
                     <Row data={this.state.tableData} textStyle={styles.details}/>
                 </Table>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left'
     },
-    head: {height: 40, backgroundColor: '#f1f8ff'},
+    head: {height: 40, backgroundColor: '#bababa'},
     details: {
         fontFamily: 'Toms Handwritten',
         fontSize: 25,
