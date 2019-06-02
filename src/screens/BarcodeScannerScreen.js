@@ -105,7 +105,7 @@ export default class BarcodeScannerScreen extends React.Component {
                     }).catch(() => {
                       log('there were some problems during insertion ')
                     });
-                   Alert.alert("Postać została pomyslnie przypisana do twojego konta.");
+                   Alert.alert("Postać została pomyślnie przypisana do twojego konta.");
                 });
         } catch (e) {
             alert("Something goes wrong while scanning character. " +

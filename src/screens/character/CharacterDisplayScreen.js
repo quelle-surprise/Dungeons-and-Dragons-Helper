@@ -5,6 +5,9 @@ import {Dimensions, FlatList, Image, StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-paper';
 import {Row, Rows, Table} from 'react-native-table-component';
 
+var deviceHeight = Math.round(Dimensions.get('window').height)
+var topDataHeight = 508
+
 export default class CharacterDisplayScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -30,7 +33,6 @@ export default class CharacterDisplayScreen extends React.Component {
         this.state.character = navigation.getParam('character', [""]);
         this.state.characterId = navigation.getParam('characterId', "");
         this.state.userId = navigation.getParam('userId', "");
-
         this.generateStatisticsTable();
         this.generateAdditionalSkillsList(this.state.additionalSkillsStat,
             this.state.character.proficiency, this.state.additionalSkillsNames)
@@ -127,7 +129,7 @@ export default class CharacterDisplayScreen extends React.Component {
                     <Text
                         style={styles.name}> {this.state.character.name}, {this.state.character.characterClass}  </Text>
                     <Text style={styles.name}> Poziom: {this.state.character.level}</Text>
-                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.provenance}</Text>
+                    <Text style={styles.name}> {this.state.character.char}, {this.state.character.characterRace}, {this.state.character.provenance}</Text>
                     <Fab
                         containerStyle={{}}
                         style={styles.fab}
@@ -180,7 +182,7 @@ export default class CharacterDisplayScreen extends React.Component {
                         </Table>
 
                         <Text style={styles.details}> Umiejętności </Text>
-                        <View style={{height: 230}}>
+                        <View style={{height: deviceHeight - topDataHeight}}>
                             <FlatList
                                 data={this.state.additionalSkillsWithValues}
                                 renderItem={({item}) =>
