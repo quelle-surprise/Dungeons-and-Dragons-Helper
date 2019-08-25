@@ -15,7 +15,7 @@ The project was implemented as part of curriculum at the Cracow University of Ec
 ![Character card](https://cdn.discordapp.com/attachments/539895893122482176/584784687537324033/Screenshot_2019-06-02-18-45-26-012_host.exp.exponent.png)
 ---
 #### Dice roll functionality:
-!Dice roll functionality](https://cdn.discordapp.com/attachments/539895893122482176/584782027056742400/Screenshot_2019-06-02-18-33-58-144_host.exp.exponent.png)
+![Dice roll functionality](https://cdn.discordapp.com/attachments/539895893122482176/584782027056742400/Screenshot_2019-06-02-18-33-58-144_host.exp.exponent.png)
 ---
 #### Skill list:
 ![Skill list](https://cdn.discordapp.com/attachments/539895893122482176/584782025064448001/Screenshot_2019-06-02-18-34-01-589_host.exp.exponent.png)
