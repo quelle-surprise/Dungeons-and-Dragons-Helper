@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "latest",
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "expo-facebook": "^4.0.0",
     "firebase": "^6.0.4",
     "native-base": "^2.12.1",
